@@ -1,0 +1,3 @@
+rootProject.name='AG Skeleton Loading'
+include ':app'
+include ':skeletonloading'
