@@ -1,8 +1,14 @@
 package aglibs.loading.skeleton
 
+import aglibs.loading.skeleton.SkeletonDrawer.Companion.DEFAULT_DURATION_MILLIS
 import android.animation.ValueAnimator
+import android.graphics.Canvas
 import android.graphics.Color
 import android.view.animation.AccelerateDecelerateInterpolator
+
+fun SkeletonDrawer.onDraw(canvas: Canvas?){
+
+}
 
 class AnimationUtils {
 
@@ -12,7 +18,7 @@ class AnimationUtils {
             reverse: Boolean = false,
             repeatCount: Int = ValueAnimator.INFINITE,
             repeatMode: Int = ValueAnimator.RESTART,
-            duration: Int = SkeletonTextView.DEFAULT_DURATION_MILLIS,
+            duration: Int = DEFAULT_DURATION_MILLIS,
             updateListener: ValueAnimator.AnimatorUpdateListener? = null
         ): ValueAnimator {
             val valueAnimator =

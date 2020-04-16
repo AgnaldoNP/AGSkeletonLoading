@@ -1,8 +1,7 @@
 package aglibs.loading.skeleton
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.forEach
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -18,11 +17,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun loading(loading: Boolean) {
         for (i in 0 until skeletonLoadingContainer.childCount) {
-            (skeletonLoadingContainer.getChildAt(i) as? SkeletonTextView)?.let {
+            (skeletonLoadingContainer.getChildAt(i) as? ISkeletonDrawer)?.let {
                 if (!loading) {
                     it.startLoading()
                 } else {
-                    it.clearLoading()
+                    it.stopLoading()
                 }
             }
         }
