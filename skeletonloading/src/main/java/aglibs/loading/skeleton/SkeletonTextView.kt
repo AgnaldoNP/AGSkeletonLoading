@@ -21,10 +21,11 @@ class SkeletonTextView @JvmOverloads constructor(
     private lateinit var skeletonEffectPaint: Paint
 
     companion object {
-        const val DEFAULT_DURATION_MILLIS = 1500
+        const val DEFAULT_DURATION_MILLIS = 1200
         const val ROUND_PIXELS = 10F
         const val STROKE_WIDTH = 30F
-        var BASE_COLOR = Color.rgb(100, 100, 100)
+        const val BLUR_WIDTH = 50F
+        var BASE_COLOR = Color.rgb(230, 230, 230)
     }
 
     init {
@@ -44,10 +45,9 @@ class SkeletonTextView @JvmOverloads constructor(
             style = Paint.Style.STROKE
             strokeWidth = STROKE_WIDTH
             color = AnimationUtils.lightenColor(BASE_COLOR, 0.2F)
-            maskFilter = BlurMaskFilter(30f, BlurMaskFilter.Blur.NORMAL);
+            maskFilter = BlurMaskFilter(BLUR_WIDTH, BlurMaskFilter.Blur.NORMAL);
         }
     }
-
 
     private fun getStyles(attrs: AttributeSet?, defStyle: Int) {
         attrs?.let {
@@ -71,20 +71,6 @@ class SkeletonTextView @JvmOverloads constructor(
     override fun onAnimationUpdate(animator: ValueAnimator) {
         val animationProgress = animator.animatedValue as Float
         createSkeleton(animationProgress)
-
-        //remove after
-        BASE_COLOR = Color.rgb(235, 235, 235)
-        skeletonEffectPaint = Paint().apply {
-            style = Paint.Style.STROKE
-            strokeWidth = STROKE_WIDTH
-            color = AnimationUtils.lightenColor(BASE_COLOR, 0.4F)
-            maskFilter = BlurMaskFilter(50f, BlurMaskFilter.Blur.NORMAL)
-        }
-        skeletonPaint = Paint().apply {
-            style = Paint.Style.FILL
-            color = BASE_COLOR
-        }
-
         invalidate()
     }
 

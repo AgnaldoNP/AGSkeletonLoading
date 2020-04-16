@@ -14,6 +14,7 @@
         android:text="Start Loadind" />
 
     <LinearLayout
+        android:id="@+id/skeletonLoadingContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/startLoadingButton"
@@ -24,14 +25,38 @@
             android:id="@+id/skeletonTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World Skeloton Loading" />
+            android:text="What is Lorem Ipsum?" />
 
         <aglibs.loading.skeleton.SkeletonTextView
             android:id="@+id/skeletonTextView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Lorem Ipsum is simply dummy text" />
+
+        <aglibs.loading.skeleton.SkeletonTextView
+            android:id="@+id/skeletonTextView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
+
+
+        <aglibs.loading.skeleton.SkeletonTextView
+            android:id="@+id/skeletonTextView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Hello World Skeloton Loading" />
+            android:text="Lorem Ipsum" />
+
+        <aglibs.loading.skeleton.SkeletonTextView
+            android:id="@+id/skeletonTextView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="8dp"
+            android:text="Lorem Ipsum" />
+
 
     </LinearLayout>
 
