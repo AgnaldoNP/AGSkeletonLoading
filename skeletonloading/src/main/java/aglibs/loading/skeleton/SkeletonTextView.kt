@@ -26,9 +26,7 @@ class SkeletonTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
-        if (isLoading() && canvas != null) {
-            skeletonDrawer.draw(canvas)
-        } else {
+        if(!skeletonDrawer.draw(canvas)){
             super.onDraw(canvas)
         }
     }

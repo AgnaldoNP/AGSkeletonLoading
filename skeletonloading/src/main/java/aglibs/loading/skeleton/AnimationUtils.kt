@@ -1,6 +1,5 @@
 package aglibs.loading.skeleton
 
-import aglibs.loading.skeleton.SkeletonDrawer.Companion.DEFAULT_DURATION_MILLIS
 import android.animation.ValueAnimator
 import android.graphics.Canvas
 import android.graphics.Color
@@ -18,8 +17,8 @@ class AnimationUtils {
             reverse: Boolean = false,
             repeatCount: Int = ValueAnimator.INFINITE,
             repeatMode: Int = ValueAnimator.RESTART,
-            duration: Int = DEFAULT_DURATION_MILLIS,
-            updateListener: ValueAnimator.AnimatorUpdateListener? = null
+            duration: Int = SkeletonDrawer.Duration.MEDIUM.millis(),
+            updateListener: ValueAnimator.AnimatorUpdateListener
         ): ValueAnimator {
             val valueAnimator =
                 if (reverse) ValueAnimator.ofFloat(1f, 0f) else ValueAnimator.ofFloat(0f, 1f)

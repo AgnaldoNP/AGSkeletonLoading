@@ -11,7 +11,7 @@
         android:id="@+id/startLoadingButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start Loadind" />
+        android:text="Start/Stop Loadind" />
 
     <LinearLayout
         android:id="@+id/skeletonLoadingContainer"
@@ -25,7 +25,8 @@
             android:id="@+id/skeletonTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="What is Lorem Ipsum?" />
+            android:text="What is Lorem Ipsum?"
+            app:initWithLoading="true" />
 
         <aglibs.loading.skeleton.SkeletonTextView
             android:id="@+id/skeletonTextView2"
@@ -56,6 +57,15 @@
             android:layout_gravity="end"
             android:layout_marginTop="8dp"
             android:text="Lorem Ipsum" />
+
+
+        <aglibs.loading.skeleton.SkeletonTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:text="Lorem Ipsum"
+            app:initWithLoading="false" />
 
 
     </LinearLayout>
