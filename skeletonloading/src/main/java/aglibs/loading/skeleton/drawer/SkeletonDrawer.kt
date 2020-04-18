@@ -1,5 +1,7 @@
-package aglibs.loading.skeleton
+package aglibs.loading.skeleton.drawer
 
+import aglibs.loading.skeleton.util.AnimationUtils
+import aglibs.loading.skeleton.R
 import android.animation.ValueAnimator
 import android.graphics.*
 import android.util.AttributeSet
@@ -28,11 +30,16 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
     private var initWithLoading: Boolean = true
     private var enableDevelopPreview: Boolean = true
     private var animationDuration: Int = Duration.MEDIUM.millis()
-    private var skeletonColor: Int = BASE_COLOR
-    private var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
-    private var skeletonEffectBlurWidth: Float = BLUR_WIDTH
-    private var skeletonEffectLightenFactor: Float = LIGHTNEN_FACTOR
-    private var skeletonCornerRadius: Float = ROUND_PIXELS
+    private var skeletonColor: Int =
+        BASE_COLOR
+    private var skeletonEffectStrokeWidth: Float =
+        STROKE_WIDTH
+    private var skeletonEffectBlurWidth: Float =
+        BLUR_WIDTH
+    private var skeletonEffectLightenFactor: Float =
+        LIGHTNEN_FACTOR
+    private var skeletonCornerRadius: Float =
+        ROUND_PIXELS
 
     enum class Duration(val duration: Int) {
         SHORT(0) {
@@ -116,9 +123,10 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
     init {
         view.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
 
-        valueAnimator = AnimationUtils.getValueAnimator(
-            updateListener = this
-        )
+        valueAnimator =
+            AnimationUtils.getValueAnimator(
+                updateListener = this
+            )
 
         skeletonPath = Path()
         skeletonEffectPath = Path()
@@ -143,7 +151,11 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
 
         skeletonEffectPaint.apply {
             strokeWidth = skeletonEffectStrokeWidth
-            color = AnimationUtils.lightenColor(skeletonColor, skeletonEffectLightenFactor)
+            color =
+                AnimationUtils.lightenColor(
+                    skeletonColor,
+                    skeletonEffectLightenFactor
+                )
             maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
         }
 

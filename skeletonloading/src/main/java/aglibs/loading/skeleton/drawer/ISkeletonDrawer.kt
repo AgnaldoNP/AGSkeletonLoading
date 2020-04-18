@@ -1,4 +1,4 @@
-package aglibs.loading.skeleton
+package aglibs.loading.skeleton.drawer
 
 interface ISkeletonDrawer {
 

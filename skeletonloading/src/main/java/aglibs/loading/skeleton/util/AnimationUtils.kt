@@ -1,5 +1,6 @@
-package aglibs.loading.skeleton
+package aglibs.loading.skeleton.util
 
+import aglibs.loading.skeleton.drawer.SkeletonDrawer
 import android.animation.ValueAnimator
 import android.graphics.Canvas
 import android.graphics.Color
@@ -73,9 +74,24 @@ class AnimationUtils {
             } else {
                 val q = if (l < 0.5f) l * (1 + s) else l + s - l * s
                 val p = 2 * l - q
-                r = hue2rgb(p, q, h + 1f / 3)
-                g = hue2rgb(p, q, h)
-                b = hue2rgb(p, q, h - 1f / 3)
+                r =
+                    hue2rgb(
+                        p,
+                        q,
+                        h + 1f / 3
+                    )
+                g =
+                    hue2rgb(
+                        p,
+                        q,
+                        h
+                    )
+                b =
+                    hue2rgb(
+                        p,
+                        q,
+                        h - 1f / 3
+                    )
             }
 
             return Color.rgb((r * 255).toInt(), (g * 255).toInt(), (b * 255).toInt())
@@ -106,10 +122,15 @@ class AnimationUtils {
             color: Int,
             value: Float
         ): Int {
-            val hsl = colorToHSL(color)
+            val hsl =
+                colorToHSL(
+                    color
+                )
             hsl[2] += value
             hsl[2] = 0f.coerceAtLeast(hsl[2].coerceAtMost(1f))
-            return hslToColor(hsl)
+            return hslToColor(
+                hsl
+            )
         }
 
         /**
@@ -127,10 +148,15 @@ class AnimationUtils {
             color: Int,
             value: Float
         ): Int {
-            val hsl = colorToHSL(color)
+            val hsl =
+                colorToHSL(
+                    color
+                )
             hsl[2] -= value
             hsl[2] = 0f.coerceAtLeast(hsl[2].coerceAtMost(1f))
-            return hslToColor(hsl)
+            return hslToColor(
+                hsl
+            )
         }
 
     }
