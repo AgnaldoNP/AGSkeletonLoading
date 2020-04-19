@@ -1,7 +1,7 @@
 package aglibs.loading.skeleton.view
 
 import aglibs.loading.skeleton.drawer.ISkeletonDrawer
-import aglibs.loading.skeleton.drawer.SkeletonDrawer
+import aglibs.loading.skeleton.drawer.SkeletonViewDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
@@ -14,9 +14,7 @@ class SkeletonTextView @JvmOverloads constructor(
 ) : AppCompatTextView(context, attrs, defStyleAttr),
     ISkeletonDrawer {
 
-    private var skeletonDrawer: SkeletonDrawer = SkeletonDrawer(
-        this
-    ).apply {
+    private var skeletonDrawer = SkeletonViewDrawer(this).apply {
         getStyles(attrs, defStyleAttr)
     }
 
@@ -31,7 +29,7 @@ class SkeletonTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
-        if(!skeletonDrawer.draw(canvas)){
+        if (!skeletonDrawer.draw(canvas)) {
             super.onDraw(canvas)
         }
     }

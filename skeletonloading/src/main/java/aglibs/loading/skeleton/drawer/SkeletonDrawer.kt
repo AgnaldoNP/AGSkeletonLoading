@@ -8,7 +8,7 @@ import android.util.AttributeSet
 import android.view.View
 
 @Suppress("unused")
-class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListener {
+abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListener {
 
     companion object {
         private const val ROUND_PIXELS = 10F
@@ -19,27 +19,16 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
     }
 
     private var valueAnimator: ValueAnimator
-
-    private var skeletonPath: Path
-    private var skeletonPaint: Paint
-    private var skeletonEffectPath: Path
-    private var skeletonEffectPaint: Paint
-
-    private var currentAnimationProgress: Float = 0F
-
-    private var initWithLoading: Boolean = true
-    private var enableDevelopPreview: Boolean = true
     private var animationDuration: Int = Duration.MEDIUM.millis()
-    private var skeletonColor: Int =
-        BASE_COLOR
-    private var skeletonEffectStrokeWidth: Float =
-        STROKE_WIDTH
-    private var skeletonEffectBlurWidth: Float =
-        BLUR_WIDTH
-    private var skeletonEffectLightenFactor: Float =
-        LIGHTNEN_FACTOR
-    private var skeletonCornerRadius: Float =
-        ROUND_PIXELS
+
+    protected var currentAnimationProgress: Float = 0F
+    protected var initWithLoading: Boolean = true
+    protected var enableDevelopPreview: Boolean = true
+    protected var skeletonColor: Int = BASE_COLOR
+    protected var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
+    protected var skeletonEffectBlurWidth: Float = BLUR_WIDTH
+    protected var skeletonEffectLightenFactor: Float = LIGHTNEN_FACTOR
+    protected var skeletonCornerRadius: Float = ROUND_PIXELS
 
     enum class Duration(val duration: Int) {
         SHORT(0) {
@@ -128,17 +117,6 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
                 updateListener = this
             )
 
-        skeletonPath = Path()
-        skeletonEffectPath = Path()
-
-        skeletonPaint = Paint().also {
-            it.style = Paint.Style.FILL
-        }
-
-        skeletonEffectPaint = Paint().also {
-            it.style = Paint.Style.STROKE
-        }
-
         view.post {
             if (initWithLoading) {
                 startLoading()
@@ -146,29 +124,17 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
         }
     }
 
-    private fun applyStyles() {
-        skeletonPaint.color = skeletonColor
-
-        skeletonEffectPaint.apply {
-            strokeWidth = skeletonEffectStrokeWidth
-            color =
-                AnimationUtils.lightenColor(
-                    skeletonColor,
-                    skeletonEffectLightenFactor
-                )
-            maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
-        }
-
+    protected open fun applyStyles() {
         valueAnimator.duration = animationDuration.toLong()
     }
 
     fun isLoading() = valueAnimator.isRunning
 
-    fun startLoading() {
+    open fun startLoading() {
         valueAnimator.start()
     }
 
-    fun stopLoading() {
+    open fun stopLoading() {
         valueAnimator.cancel()
         valueAnimator.end()
         view.invalidate()
@@ -180,40 +146,7 @@ class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListe
         view.invalidate()
     }
 
-    private fun createSkeleton() {
-        val viewWidth = view.width
-        val viewHeight = view.height
-
-        skeletonPath.reset()
-        skeletonPath.addRoundRect(
-            0F, 0F, viewWidth.toFloat(), viewHeight.toFloat(),
-            skeletonCornerRadius, skeletonCornerRadius, Path.Direction.CCW
-        )
-
-        val x = viewWidth * currentAnimationProgress
-        skeletonEffectPath.reset()
-        skeletonEffectPath.moveTo(x, 0f)
-        skeletonEffectPath.lineTo(x, viewHeight.toFloat())
-    }
-
-    fun draw(canvas: Canvas?): Boolean {
-        canvas?.let {
-            if (!view.isInEditMode) {
-                if (isLoading()) {
-                    canvas.drawPath(skeletonPath, skeletonPaint)
-                    canvas.drawPath(skeletonEffectPath, skeletonEffectPaint)
-                    return true
-                }
-            } else {
-                if (initWithLoading && enableDevelopPreview) {
-                    createSkeleton()
-                    canvas.drawPath(skeletonPath, skeletonPaint)
-                    return true
-                }
-            }
-        }
-
-        return false
-    }
+    abstract fun createSkeleton()
+    abstract fun draw(canvas: Canvas?): Boolean
 
 }

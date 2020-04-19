@@ -23,6 +23,23 @@ android {
         }
     }
 
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    android.compileOptions.sourceCompatibility 1.8
+    android.compileOptions.targetCompatibility 1.8
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'protobuf.meta'
+    }
+
 }
 
 dependencies {

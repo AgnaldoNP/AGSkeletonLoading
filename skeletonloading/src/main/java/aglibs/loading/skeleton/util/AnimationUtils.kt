@@ -2,13 +2,8 @@ package aglibs.loading.skeleton.util
 
 import aglibs.loading.skeleton.drawer.SkeletonDrawer
 import android.animation.ValueAnimator
-import android.graphics.Canvas
 import android.graphics.Color
 import android.view.animation.AccelerateDecelerateInterpolator
-
-fun SkeletonDrawer.onDraw(canvas: Canvas?){
-
-}
 
 class AnimationUtils {
 

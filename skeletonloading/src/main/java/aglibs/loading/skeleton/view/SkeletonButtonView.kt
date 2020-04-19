@@ -1,8 +1,8 @@
 package aglibs.loading.skeleton.view
 
-import aglibs.loading.skeleton.drawer.ISkeletonDrawer
 import aglibs.loading.skeleton.R
-import aglibs.loading.skeleton.drawer.SkeletonDrawer
+import aglibs.loading.skeleton.drawer.ISkeletonDrawer
+import aglibs.loading.skeleton.drawer.SkeletonViewDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
@@ -14,16 +14,15 @@ class SkeletonButtonView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AppCompatButton(
-    ContextThemeWrapper(context,
+    ContextThemeWrapper(
+        context,
         R.style.Widget_AppCompat_Button
     ),
     attrs,
     defStyleAttr
 ), ISkeletonDrawer {
 
-    private var skeletonDrawer: SkeletonDrawer = SkeletonDrawer(
-        this
-    ).apply {
+    private var skeletonDrawer = SkeletonViewDrawer(this).apply {
         getStyles(attrs, defStyleAttr)
     }
 
