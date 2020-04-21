@@ -9,12 +9,13 @@ import android.graphics.Canvas
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.constraintlayout.widget.ConstraintLayout
 
-class SkeletonLinearLayout @JvmOverloads constructor(
+class SkeletonConstraintLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayoutCompat(context, attrs, defStyleAttr),
+) : ConstraintLayout(context, attrs, defStyleAttr),
     ISkeletonDrawer {
 
     private var skeletonDrawer = SkeletonViewGroupDrawer(this).apply {
@@ -23,6 +24,7 @@ class SkeletonLinearLayout @JvmOverloads constructor(
 
     init {
         setWillNotDraw(false)
+        invalidate()
     }
 
     override fun getSkeletonDrawer() = skeletonDrawer

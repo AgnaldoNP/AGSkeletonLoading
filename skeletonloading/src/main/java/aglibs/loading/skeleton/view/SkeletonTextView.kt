@@ -18,6 +18,8 @@ class SkeletonTextView @JvmOverloads constructor(
         getStyles(attrs, defStyleAttr)
     }
 
+    override fun getSkeletonDrawer() = skeletonDrawer
+
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {

@@ -5,5 +5,6 @@ interface ISkeletonDrawer {
     fun isLoading(): Boolean
     fun startLoading()
     fun stopLoading()
+    fun getSkeletonDrawer(): SkeletonDrawer
 
 }

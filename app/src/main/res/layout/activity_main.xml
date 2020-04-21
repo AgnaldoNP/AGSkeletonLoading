@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#666"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     tools:context=".MainActivity">
@@ -25,6 +26,80 @@
             android:layout_below="@+id/startLoadingButton"
             android:layout_marginTop="30dp"
             android:orientation="vertical">
+
+            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <aglibs.loading.skeleton.view.SkeletonImageView
+                    android:id="@+id/img012"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text011"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Lorem Ipsum is simply dummy text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img012"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text010"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Lorem Ipsum Text"
+                    app:layout_constraintStart_toEndOf="@+id/img012"
+                    app:layout_constraintTop_toBottomOf="@id/text011" />
+
+            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>
+
+
+            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:id="@+id/img007"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text006"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:text="Lorem Ipsum is simply dummy text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img007"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/text005"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Lorem Ipsum Text"
+                    app:layout_constraintStart_toEndOf="@+id/img007"
+                    app:layout_constraintTop_toBottomOf="@id/text006" />
+
+            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>
+
 
             <aglibs.loading.skeleton.layout.SkeletonLinearLayout
                 android:layout_width="match_parent"
@@ -272,10 +347,8 @@
                 android:text="Lorem Ipsum"
                 app:initWithLoading="true" />
 
-
         </LinearLayout>
 
     </RelativeLayout>
-
 
 </ScrollView>

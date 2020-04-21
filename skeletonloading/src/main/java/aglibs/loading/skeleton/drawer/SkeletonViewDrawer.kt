@@ -1,43 +1,22 @@
 package aglibs.loading.skeleton.drawer
 
-import aglibs.loading.skeleton.util.AnimationUtils
-import aglibs.loading.skeleton.R
-import android.animation.ValueAnimator
-import android.graphics.*
-import android.util.AttributeSet
+import android.graphics.Canvas
+import android.graphics.Path
+import android.graphics.Rect
 import android.view.View
 
 @Suppress("unused")
-class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view){
+class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
 
     private var skeletonPath: Path = Path()
-    private var skeletonPaint: Paint = Paint().also {
-        it.style = Paint.Style.FILL
-    }
-
+    private var skeletonRect: Rect = Rect()
     private var skeletonEffectPath: Path = Path()
-    private var skeletonEffectPaint: Paint = Paint().also {
-        it.style = Paint.Style.STROKE
-    }
-
-    override fun applyStyles() {
-        super.applyStyles()
-        skeletonPaint.color = skeletonColor
-
-        skeletonEffectPaint.apply {
-            strokeWidth = skeletonEffectStrokeWidth
-            color =
-                AnimationUtils.lightenColor(
-                    skeletonColor,
-                    skeletonEffectLightenFactor
-                )
-            maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
-        }
-    }
 
     override fun createSkeleton() {
         val viewWidth = view.width
         val viewHeight = view.height
+
+        skeletonRect.set(0, 0, viewWidth, viewHeight)
 
         skeletonPath.reset()
         skeletonPath.addRoundRect(
@@ -56,12 +35,19 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view){
         skeletonEffectPath.lineTo(x, viewHeight.toFloat())
     }
 
+    override fun getSkeletonRects(): List<Rect> {
+        createSkeleton()
+        return listOf(skeletonRect)
+    }
+
     override fun draw(canvas: Canvas?): Boolean {
         canvas?.let {
             if (!view.isInEditMode) {
                 if (isLoading()) {
                     canvas.drawPath(skeletonPath, skeletonPaint)
-                    canvas.drawPath(skeletonEffectPath, skeletonEffectPaint)
+                    if (!disableAnimation) {
+                        canvas.drawPath(skeletonEffectPath, skeletonEffectPaint)
+                    }
                     return true
                 }
             } else {
@@ -72,7 +58,6 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view){
                 }
             }
         }
-
         return false
     }
 

@@ -1,45 +1,29 @@
 package aglibs.loading.skeleton.drawer
 
-import aglibs.loading.skeleton.util.AnimationUtils
-import android.graphics.*
+import aglibs.loading.skeleton.getAllLineBounds
+import android.graphics.Canvas
+import android.graphics.Path
+import android.graphics.Rect
+import android.graphics.RectF
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.graphics.toRect
 
 @Suppress("unused")
 class SkeletonViewGroupDrawer(private val view: View) : SkeletonDrawer(view) {
 
-    private var hashMapSkeleton: HashMap<View, Path> = hashMapOf()
-    private var skeletonPaint: Paint = Paint().also {
-        it.style = Paint.Style.FILL
-    }
-
-    private var hashMapSkeletonEffect: HashMap<View, Pair<Path, RectF>> = hashMapOf()
-    private var skeletonEffectPaint: Paint = Paint().also {
-        it.style = Paint.Style.STROKE
-    }
+    private val hashMapSkeleton: HashMap<View, ArrayList<Path>> = hashMapOf()
+    private val skeletonRects: ArrayList<Rect> = arrayListOf()
+    private val effectPath: Path = Path()
 
     private val visibilityViewsMap = hashMapOf<View, Int>()
-
-    override fun applyStyles() {
-        super.applyStyles()
-        skeletonPaint.color = skeletonColor
-
-        skeletonEffectPaint.apply {
-            strokeWidth = skeletonEffectStrokeWidth
-            color = AnimationUtils.lightenColor(
-                skeletonColor,
-                skeletonEffectLightenFactor
-            )
-            maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
-        }
-    }
 
     override fun startLoading() {
         getAllVisibilityNonViewGroupViews(view, visibilityViewsMap)
         visibilityViewsMap.forEach {
-            hashMapSkeleton[it.key] = Path()
-            hashMapSkeletonEffect[it.key] = Pair(Path(), RectF())
-            it.key.visibility = View.GONE
+            hashMapSkeleton[it.key] = arrayListOf()
+            it.key.visibility = View.INVISIBLE
         }
 
         super.startLoading()
@@ -47,15 +31,27 @@ class SkeletonViewGroupDrawer(private val view: View) : SkeletonDrawer(view) {
 
     override fun stopLoading() {
         super.stopLoading()
-        visibilityViewsMap.forEach { it.key.visibility = it.value }
+        visibilityViewsMap.forEach {
+            it.key.visibility = it.value
+            if ((it.key is ISkeletonDrawer)) {
+                (it.key as ISkeletonDrawer).stopLoading()
+            }
+        }
     }
+
+    override fun getSkeletonRects(): List<Rect> = skeletonRects
 
     private fun getAllVisibilityNonViewGroupViews(v: View, viewsMap: HashMap<View, Int>) {
         v.takeIf { v is ViewGroup }?.let {
             for (i in 0 until (v as ViewGroup).childCount) {
                 getAllVisibilityNonViewGroupViews(v.getChildAt(i), viewsMap)
             }
-        } ?: run { viewsMap.put(v, v.visibility) }
+        } ?: run {
+            if ((v is ISkeletonDrawer)) {
+                (v as ISkeletonDrawer).getSkeletonDrawer().disableAnimation = true
+            }
+            viewsMap.put(v, v.visibility)
+        }
     }
 
     private fun getPathLeft(v: View): Int {
@@ -85,61 +81,102 @@ class SkeletonViewGroupDrawer(private val view: View) : SkeletonDrawer(view) {
     }
 
     override fun createSkeleton() {
-        visibilityViewsMap.forEach {
-            val viewWidth = it.key.width.toFloat()
-            val viewHeight = it.key.height.toFloat()
-            val left = getPathLeft(it.key).toFloat()
-            val top = getPathTop(it.key).toFloat()
-            val right = viewWidth + left
-            val bottom = viewHeight + top
+        visibilityViewsMap.forEach { map ->
+            val visibleView = map.key
+            val left = getPathLeft(visibleView).toFloat()
+            val top = getPathTop(visibleView).toFloat()
 
-            val rect = RectF(left, top, right, bottom)
+            hashMapSkeleton[visibleView]?.clear()
+            skeletonRects.clear()
 
-            hashMapSkeleton[it.key]?.reset()
-            hashMapSkeleton[it.key]?.addRoundRect(
-                rect, skeletonCornerRadius, skeletonCornerRadius, Path.Direction.CCW
-            )
+            when (visibleView) {
+                is TextView -> {
+                    val allLineBounds = visibleView.getAllLineBounds()
+                    allLineBounds.forEach { lineBound ->
+                        lineBound.offset(left.toInt(), top.toInt())
+                        hashMapSkeleton[visibleView]?.add(Path().also { path ->
+                            path.addRoundRect(
+                                RectF(lineBound),
+                                skeletonCornerRadius,
+                                skeletonCornerRadius,
+                                Path.Direction.CCW
+                            )
+                        })
+                        skeletonRects.add(lineBound)
+                    }
+                }
+                is ISkeletonDrawer -> {
+                    val skeletonDrawer = visibleView.getSkeletonDrawer()
+                    val skeletonDrawerRects = skeletonDrawer.getSkeletonRects()
+                    val radius = skeletonDrawer.skeletonCornerRadius
 
-            hashMapSkeletonEffect[it.key]?.let { pair ->
-                hashMapSkeletonEffect[it.key] = Pair(pair.first, rect)
+                    skeletonDrawerRects.forEach { skeletonRect ->
+                        skeletonRect.offset(left.toInt(), top.toInt())
+                        hashMapSkeleton[visibleView]?.add(Path().also { path ->
+                            path.addRoundRect(
+                                RectF(skeletonRect),
+                                radius, radius,
+                                Path.Direction.CCW
+                            )
+                        })
+                        skeletonRects.add(skeletonRect)
+                    }
+
+                }
+                else -> {
+                    val viewWidth = visibleView.width.toFloat()
+                    val viewHeight = visibleView.height.toFloat()
+                    val right = viewWidth + left
+                    val bottom = viewHeight + top
+                    val rect = RectF(left, top, right, bottom)
+
+                    hashMapSkeleton[visibleView]?.add(Path().also { path ->
+                        path.addRoundRect(
+                            rect,
+                            skeletonCornerRadius,
+                            skeletonCornerRadius,
+                            Path.Direction.CCW
+                        )
+                        skeletonRects.add(rect.toRect())
+                    })
+                }
             }
         }
     }
 
     override fun createSkeletonEffect() {
-        hashMapSkeletonEffect.forEach {
-            val viewWidth = it.key.width
-            val viewHeight = it.key.height
+        val viewWidth = view.width
+        val viewHeight = view.height
 
-            val left = it.value.second.left
-            val top = it.value.second.top
-
-            val effectX = left + (viewWidth * currentAnimationProgress)
-            it.value.first.reset()
-            it.value.first.moveTo(effectX, top)
-            it.value.first.lineTo(effectX, top + viewHeight.toFloat())
-        }
+        val effectX = viewWidth * currentAnimationProgress
+        effectPath.reset()
+        effectPath.moveTo(effectX, 0F)
+        effectPath.lineTo(effectX, viewHeight.toFloat())
     }
 
     override fun draw(canvas: Canvas?): Boolean {
         canvas?.let {
             if (!view.isInEditMode) {
                 if (isLoading()) {
-                    hashMapSkeleton.forEach {
-                        canvas.drawPath(it.value, skeletonPaint)
+                    hashMapSkeleton.forEach { paths ->
+                        paths.value.forEach { path ->
+                            canvas.drawPath(path, skeletonPaint)
+                        }
                     }
-                    hashMapSkeletonEffect.forEach {
-                        canvas.drawPath(
-                            it.value.first,
-                            skeletonEffectPaint
-                        )
+
+                    if (!disableAnimation) {
+                        canvas.drawPath(effectPath, skeletonEffectPaint)
                     }
                     return true
                 }
             } else {
                 if (initWithLoading && enableDevelopPreview) {
                     createSkeleton()
-                    hashMapSkeleton.forEach { canvas.drawPath(it.value, skeletonPaint) }
+                    hashMapSkeleton.forEach { paths ->
+                        paths.value.forEach { path ->
+                            canvas.drawPath(path, skeletonPaint)
+                        }
+                    }
                     return true
                 }
             }

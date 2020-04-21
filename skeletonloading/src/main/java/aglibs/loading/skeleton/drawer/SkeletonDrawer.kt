@@ -28,7 +28,17 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     protected var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
     protected var skeletonEffectBlurWidth: Float = BLUR_WIDTH
     protected var skeletonEffectLightenFactor: Float = LIGHTNEN_FACTOR
-    protected var skeletonCornerRadius: Float = ROUND_PIXELS
+    var skeletonCornerRadius: Float = ROUND_PIXELS
+
+    var disableAnimation: Boolean = false
+
+    var skeletonPaint: Paint = Paint().also {
+        it.style = Paint.Style.FILL
+    }
+
+    var skeletonEffectPaint: Paint = Paint().also {
+        it.style = Paint.Style.STROKE
+    }
 
     enum class Duration(val duration: Int) {
         SHORT(0) {
@@ -126,6 +136,17 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     protected open fun applyStyles() {
         valueAnimator.duration = animationDuration.toLong()
+
+        skeletonPaint.color = skeletonColor
+
+        skeletonEffectPaint.apply {
+            strokeWidth = skeletonEffectStrokeWidth
+            color = AnimationUtils.lightenColor(
+                skeletonColor,
+                skeletonEffectLightenFactor
+            )
+            maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
+        }
     }
 
     fun isLoading() = valueAnimator.isRunning
@@ -133,6 +154,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     open fun startLoading() {
         createSkeleton()
         valueAnimator.start()
+        view.invalidate()
     }
 
     open fun stopLoading() {
@@ -147,6 +169,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         view.invalidate()
     }
 
+    abstract fun getSkeletonRects(): List<Rect>
     abstract fun createSkeleton()
     abstract fun createSkeletonEffect()
     abstract fun draw(canvas: Canvas?): Boolean
