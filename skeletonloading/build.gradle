@@ -32,6 +32,10 @@ android {
     android.compileOptions.sourceCompatibility 1.8
     android.compileOptions.targetCompatibility 1.8
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     packagingOptions {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE.txt'

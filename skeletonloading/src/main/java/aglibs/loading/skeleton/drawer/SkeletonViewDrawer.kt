@@ -44,6 +44,11 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view){
             0F, 0F, viewWidth.toFloat(), viewHeight.toFloat(),
             skeletonCornerRadius, skeletonCornerRadius, Path.Direction.CCW
         )
+    }
+
+    override fun createSkeletonEffect() {
+        val viewWidth = view.width
+        val viewHeight = view.height
 
         val x = viewWidth * currentAnimationProgress
         skeletonEffectPath.reset()

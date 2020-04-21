@@ -131,6 +131,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     fun isLoading() = valueAnimator.isRunning
 
     open fun startLoading() {
+        createSkeleton()
         valueAnimator.start()
     }
 
@@ -142,11 +143,12 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     override fun onAnimationUpdate(animator: ValueAnimator) {
         currentAnimationProgress = animator.animatedValue as Float
-        createSkeleton()
+        createSkeletonEffect()
         view.invalidate()
     }
 
     abstract fun createSkeleton()
+    abstract fun createSkeletonEffect()
     abstract fun draw(canvas: Canvas?): Boolean
 
 }
