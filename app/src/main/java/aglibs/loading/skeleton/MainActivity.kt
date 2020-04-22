@@ -9,12 +9,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    var loading = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         startLoadingButton.setOnClickListener {
-            loading(skeletonLoadingContainer, skeletonTextView.isLoading())
+            loading(skeletonLoadingContainer, loading)
+            loading = !loading
         }
     }
 

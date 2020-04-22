@@ -10,6 +10,7 @@
         <item name="skeletonEffectBlurWidth">@dimen/defaultSkeletonBlurWidth</item>
         <item name="skeletonEffectLightenFactor">0.2</item>
         <item name="skeletonCornerRadius">@dimen/defaultSkeletonCornerRadius</item>
+        <item name="splitSkeletonTextByLines">false</item>
     </style>
 
 </resources>

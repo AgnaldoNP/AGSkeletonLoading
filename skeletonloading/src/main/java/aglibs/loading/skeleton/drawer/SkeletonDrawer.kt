@@ -14,31 +14,36 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         private const val ROUND_PIXELS = 10F
         private const val STROKE_WIDTH = 30F
         private const val BLUR_WIDTH = 50F
-        private const val LIGHTNEN_FACTOR = 0.2F
+        private const val LIGHTEN_FACTOR = 0.2F
         private val BASE_COLOR = Color.rgb(230, 230, 230)
     }
 
     private var valueAnimator: ValueAnimator
     private var animationDuration: Int = Duration.MEDIUM.millis()
 
-    protected var currentAnimationProgress: Float = 0F
-    protected var initWithLoading: Boolean = true
-    protected var enableDevelopPreview: Boolean = true
-    protected var skeletonColor: Int = BASE_COLOR
-    protected var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
-    protected var skeletonEffectBlurWidth: Float = BLUR_WIDTH
-    protected var skeletonEffectLightenFactor: Float = LIGHTNEN_FACTOR
+    private var currentAnimationProgress: Float = 0F
+    private var initWithLoading: Boolean = true
+    private var enableDevelopPreview: Boolean = true
+    private var skeletonColor: Int = BASE_COLOR
+    private var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
+    private var skeletonEffectBlurWidth: Float = BLUR_WIDTH
+    private var skeletonEffectLightenFactor: Float = LIGHTEN_FACTOR
+    protected var splitSkeletonTextByLines: Boolean = false
     var skeletonCornerRadius: Float = ROUND_PIXELS
 
     var disableAnimation: Boolean = false
 
-    var skeletonPaint: Paint = Paint().also {
+    private var skeletonPaint: Paint = Paint().also {
         it.style = Paint.Style.FILL
     }
 
-    var skeletonEffectPaint: Paint = Paint().also {
+    private var skeletonEffectPaint: Paint = Paint().also {
         it.style = Paint.Style.STROKE
     }
+
+    protected val skeletonPaths: ArrayList<Path> = arrayListOf()
+    protected val skeletonRects: ArrayList<Rect> = arrayListOf()
+    private val effectPath: Path = Path()
 
     enum class Duration(val duration: Int) {
         SHORT(0) {
@@ -76,6 +81,11 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             enableDevelopPreview = typedArray.getBoolean(
                 R.styleable.SkeletonView_initWithLoading,
                 enableDevelopPreview
+            )
+
+            splitSkeletonTextByLines = typedArray.getBoolean(
+                R.styleable.SkeletonView_splitSkeletonTextByLines,
+                splitSkeletonTextByLines
             )
 
             animationDuration = Duration.get(
@@ -169,9 +179,49 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         view.invalidate()
     }
 
-    abstract fun getSkeletonRects(): List<Rect>
     abstract fun createSkeleton()
-    abstract fun createSkeletonEffect()
-    abstract fun draw(canvas: Canvas?): Boolean
+
+    fun getSkeletonRects(): List<Rect> {
+        createSkeleton()
+        return skeletonRects
+    }
+
+    private fun createSkeletonEffect() {
+        val viewWidth = view.width
+        val viewHeight = view.height
+
+        val effectX = viewWidth * currentAnimationProgress
+        effectPath.reset()
+        effectPath.moveTo(effectX, 0F)
+        effectPath.lineTo(effectX, viewHeight.toFloat())
+    }
+
+    fun draw(canvas: Canvas?): Boolean {
+        canvas?.let {
+            if (!view.isInEditMode) {
+                if (isLoading()) {
+                    skeletonPaths.forEach { path ->
+                        canvas.drawPath(path, skeletonPaint)
+                    }
+
+                    if (!disableAnimation) {
+                        canvas.drawPath(effectPath, skeletonEffectPaint)
+                    }
+                    return true
+                }
+            } else {
+                if (initWithLoading && enableDevelopPreview) {
+                    createSkeleton()
+                    skeletonPaths.forEach { path ->
+                        canvas.drawPath(path, skeletonPaint)
+                    }
+                    return true
+                }
+            }
+        }
+
+        return false
+    }
+
 
 }

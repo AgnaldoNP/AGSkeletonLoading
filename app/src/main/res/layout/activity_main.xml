@@ -27,6 +27,30 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
+
+            <aglibs.loading.skeleton.view.SkeletonTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingExtra="4dp"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                app:initWithLoading="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:splitSkeletonTextByLines="true" />
+
+            <aglibs.loading.skeleton.view.SkeletonTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:lineSpacingExtra="4dp"
+                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+                android:textAlignment="center"
+                app:initWithLoading="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:splitSkeletonTextByLines="true" />
+
             <aglibs.loading.skeleton.layout.SkeletonConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
