@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="defaultSkeletonCornerRadius">5dp</dimen>
-    <dimen name="defaultSkeletonStrokeWidth">15dp</dimen>
+    <dimen name="defaultSkeletonStrokeWidth">45dp</dimen>
     <dimen name="defaultSkeletonBlurWidth">25dp</dimen>
 
 </resources>

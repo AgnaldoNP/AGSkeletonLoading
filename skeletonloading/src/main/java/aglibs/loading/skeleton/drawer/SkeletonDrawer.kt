@@ -1,11 +1,13 @@
 package aglibs.loading.skeleton.drawer
 
-import aglibs.loading.skeleton.util.AnimationUtils
 import aglibs.loading.skeleton.R
+import aglibs.loading.skeleton.util.AnimationUtils
 import android.animation.ValueAnimator
 import android.graphics.*
+import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.util.AttributeSet
 import android.view.View
+
 
 @Suppress("unused")
 abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListener {
@@ -33,11 +35,11 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     var disableAnimation: Boolean = false
 
-    private var skeletonPaint: Paint = Paint().also {
+    private var skeletonPaint: Paint = Paint(ANTI_ALIAS_FLAG).also {
         it.style = Paint.Style.FILL
     }
 
-    private var skeletonEffectPaint: Paint = Paint().also {
+    private var skeletonEffectPaint: Paint = Paint(ANTI_ALIAS_FLAG).also {
         it.style = Paint.Style.STROKE
     }
 
@@ -201,11 +203,22 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             if (!view.isInEditMode) {
                 if (isLoading()) {
                     skeletonPaths.forEach { path ->
-                        canvas.drawPath(path, skeletonPaint)
-                    }
+                        if (!disableAnimation) {
+                            val bmp = Bitmap.createBitmap(
+                                view.width, view.height, Bitmap.Config.ARGB_8888
+                            )
 
-                    if (!disableAnimation) {
-                        canvas.drawPath(effectPath, skeletonEffectPaint)
+                            val bitmapCanvas = Canvas(bmp)
+                            bitmapCanvas.drawPath(path, skeletonPaint)
+
+                            skeletonEffectPaint.xfermode =
+                                PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
+                            bitmapCanvas.drawPath(effectPath, skeletonEffectPaint)
+
+                            canvas.drawBitmap(bmp, 0f, 0f, null)
+                        } else {
+                            canvas.drawPath(path, skeletonPaint)
+                        }
                     }
                     return true
                 }
