@@ -79,7 +79,10 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
             val top = getPathTop(subView).toFloat()
 
             if (subView is TextView && subView !is Button && subView !is EditText) {
-                val allLineBounds = subView.getAllLineBounds(splitSkeletonTextByLines)
+                val allLineBounds = subView.getAllLineBounds(
+                    splitSkeletonTextByLines, reduceToTextSpace
+                )
+
                 allLineBounds.forEach { lineBound ->
                     lineBound.offset(left.toInt(), top.toInt())
                     skeletonPaths.add(Path().also { path ->
@@ -92,8 +95,7 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
                     })
                     skeletonRects.add(lineBound)
                 }
-            }
-            else if (subView is ISkeletonDrawer) {
+            } else if (subView is ISkeletonDrawer) {
                 val skeletonDrawer = subView.getSkeletonDrawer()
                 val skeletonDrawerRects = skeletonDrawer.getSkeletonRects()
                 val radius = skeletonDrawer.skeletonCornerRadius
@@ -110,8 +112,7 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
                     skeletonRects.add(skeletonRect)
                 }
 
-            }
-            else {
+            } else {
                 val viewWidth = subView.width.toFloat()
                 val viewHeight = subView.height.toFloat()
                 val right = viewWidth + left

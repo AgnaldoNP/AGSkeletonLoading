@@ -12,27 +12,20 @@ import android.view.View
 @Suppress("unused")
 abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUpdateListener {
 
-    companion object {
-        private const val ROUND_PIXELS = 10F
-        private const val STROKE_WIDTH = 30F
-        private const val BLUR_WIDTH = 50F
-        private const val LIGHTEN_FACTOR = 0.2F
-        private val BASE_COLOR = Color.rgb(230, 230, 230)
-    }
-
     private var valueAnimator: ValueAnimator
     private var animationDuration: Int = Duration.MEDIUM.millis()
 
     private var currentAnimationProgress: Float = 0F
     private var initWithLoading: Boolean = true
     private var enableDevelopPreview: Boolean = true
-    private var skeletonColor: Int = BASE_COLOR
-    private var skeletonEffectStrokeWidth: Float = STROKE_WIDTH
-    private var skeletonEffectBlurWidth: Float = BLUR_WIDTH
-    private var skeletonEffectLightenFactor: Float = LIGHTEN_FACTOR
-    protected var splitSkeletonTextByLines: Boolean = false
-    var skeletonCornerRadius: Float = ROUND_PIXELS
+    private var skeletonColor: Int = Color.rgb(230, 230, 230)
+    private var skeletonEffectStrokeWidth: Float = 30F
+    private var skeletonEffectBlurWidth: Float = 50F
+    private var skeletonEffectLightenFactor: Float = 0.2F
+    protected var splitSkeletonTextByLines: Boolean = true
+    protected var reduceToTextSpace: Boolean = true
 
+    var skeletonCornerRadius: Float = 10F
     var disableAnimation: Boolean = false
 
     private var skeletonPaint: Paint = Paint(ANTI_ALIAS_FLAG).also {
@@ -41,6 +34,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     private var skeletonEffectPaint: Paint = Paint(ANTI_ALIAS_FLAG).also {
         it.style = Paint.Style.STROKE
+        it.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     }
 
     protected val skeletonPaths: ArrayList<Path> = arrayListOf()
@@ -88,6 +82,11 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             splitSkeletonTextByLines = typedArray.getBoolean(
                 R.styleable.SkeletonView_splitSkeletonTextByLines,
                 splitSkeletonTextByLines
+            )
+
+            reduceToTextSpace = typedArray.getBoolean(
+                R.styleable.SkeletonView_reduceToTextSpace,
+                reduceToTextSpace
             )
 
             animationDuration = Duration.get(
@@ -165,14 +164,18 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     open fun startLoading() {
         createSkeleton()
-        valueAnimator.start()
-        view.invalidate()
+        if (!isLoading()) {
+            valueAnimator.start()
+            view.invalidate()
+        }
     }
 
     open fun stopLoading() {
-        valueAnimator.cancel()
-        valueAnimator.end()
-        view.invalidate()
+        if (isLoading()) {
+            valueAnimator.cancel()
+            valueAnimator.end()
+            view.invalidate()
+        }
     }
 
     override fun onAnimationUpdate(animator: ValueAnimator) {
@@ -203,21 +206,9 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             if (!view.isInEditMode) {
                 if (isLoading()) {
                     skeletonPaths.forEach { path ->
+                        canvas.drawPath(path, skeletonPaint)
                         if (!disableAnimation) {
-                            val bmp = Bitmap.createBitmap(
-                                view.width, view.height, Bitmap.Config.ARGB_8888
-                            )
-
-                            val bitmapCanvas = Canvas(bmp)
-                            bitmapCanvas.drawPath(path, skeletonPaint)
-
-                            skeletonEffectPaint.xfermode =
-                                PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
-                            bitmapCanvas.drawPath(effectPath, skeletonEffectPaint)
-
-                            canvas.drawBitmap(bmp, 0f, 0f, null)
-                        } else {
-                            canvas.drawPath(path, skeletonPaint)
+                            canvas.drawPath(effectPath, skeletonEffectPaint)
                         }
                     }
                     return true

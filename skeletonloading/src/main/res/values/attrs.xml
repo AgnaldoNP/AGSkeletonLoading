@@ -5,6 +5,7 @@
         <attr name="initWithLoading" format="boolean" />
         <attr name="enableDevelopPreview" format="boolean" />
         <attr name="splitSkeletonTextByLines" format="boolean" />
+        <attr name="reduceToTextSpace" format="boolean" />
         <attr name="skeletonColor" format="color" />
         <attr name="skeletonEffectStrokeWidth" format="dimension" />
         <attr name="skeletonEffectBlurWidth" format="dimension" />

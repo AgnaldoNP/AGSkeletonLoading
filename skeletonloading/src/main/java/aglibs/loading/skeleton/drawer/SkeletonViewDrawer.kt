@@ -13,10 +13,14 @@ import android.widget.TextView
 class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
 
     override fun createSkeleton() {
+        skeletonPaths.clear()
         skeletonRects.clear()
 
         if (view is TextView && view !is Button && view !is EditText) {
-            val allLineBounds = view.getAllLineBounds(splitSkeletonTextByLines)
+            val allLineBounds = view.getAllLineBounds(
+                splitSkeletonTextByLines, reduceToTextSpace
+            )
+
             allLineBounds.forEach { lineBound ->
                 skeletonPaths.add(Path().also { path ->
                     path.addRoundRect(
