@@ -1,13 +1,10 @@
 package aglibs.loading.skeleton.layout
 
 import aglibs.loading.skeleton.drawer.ISkeletonDrawer
-import aglibs.loading.skeleton.drawer.SkeletonDrawer
-import aglibs.loading.skeleton.drawer.SkeletonViewDrawer
 import aglibs.loading.skeleton.drawer.SkeletonViewGroupDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.LinearLayoutCompat
 
 class SkeletonLinearLayout @JvmOverloads constructor(

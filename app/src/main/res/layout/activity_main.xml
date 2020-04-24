@@ -29,6 +29,41 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <aglibs.loading.skeleton.layout.SkeletonRelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:reduceToTextSpace="false">
+
+                <ImageView
+                    android:id="@+id/img017"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_email" />
+
+                <TextView
+                    android:id="@+id/text016"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toEndOf="@+id/img017"
+                    android:text="Lorem Ipsum is simply dummy text" />
+
+                <TextView
+                    android:id="@+id/text015"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/text016"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@+id/img017"
+                    android:text="Lorem Ipsum Text" />
+
+            </aglibs.loading.skeleton.layout.SkeletonRelativeLayout>
+
+
             <aglibs.loading.skeleton.view.SkeletonTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -5,13 +5,13 @@ import aglibs.loading.skeleton.drawer.SkeletonViewGroupDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.RelativeLayout
 
-class SkeletonConstraintLayout @JvmOverloads constructor(
+class SkeletonRelativeLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr),
+) : RelativeLayout(context, attrs, defStyleAttr),
     ISkeletonDrawer {
 
     private var skeletonDrawer = SkeletonViewGroupDrawer(this).apply {
@@ -20,7 +20,6 @@ class SkeletonConstraintLayout @JvmOverloads constructor(
 
     init {
         setWillNotDraw(false)
-        invalidate()
     }
 
     override fun getSkeletonDrawer() = skeletonDrawer
