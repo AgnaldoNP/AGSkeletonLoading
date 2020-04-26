@@ -2,18 +2,18 @@
 <resources>
 
     <declare-styleable name="SkeletonView">
-        <attr name="initWithLoading" format="boolean" />
+        <attr name="autoStart" format="boolean" />
         <attr name="enableDevelopPreview" format="boolean" />
         <attr name="splitSkeletonTextByLines" format="boolean" />
         <attr name="clipToText" format="boolean" />
         <attr name="skeletonColor" format="color" />
-        <attr name="skeletonEffectStrokeWidth" format="dimension" />
-        <attr name="skeletonEffectBlurWidth" format="dimension" />
-        <attr name="skeletonEffectLightenFactor" format="float" />
+        <attr name="shimmerStrokeWidth" format="dimension" />
+        <attr name="shimmerBlurWidth" format="dimension" />
+        <attr name="shimmerLightenFactor" format="float" />
         <attr name="skeletonCornerRadius" format="dimension" />
 
-        <attr name="customCycleDuration" format="integer" />
-        <attr name="cycleDuration" format="enum">
+        <attr name="customDuration" format="integer" />
+        <attr name="duration" format="enum">
             <enum name="shortCycle" value="0" />
             <enum name="mediumCycle" value="1" />
             <enum name="longCycle" value="2" />

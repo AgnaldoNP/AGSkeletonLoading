@@ -1,14 +1,14 @@
 <resources>
 
     <style name="DefaultSkeletonView">
-        <item name="initWithLoading">true</item>
-        <item name="cycleDuration">mediumCycle</item>
-        <item name="customCycleDuration">-1</item>
+        <item name="autoStart">true</item>
+        <item name="duration">mediumCycle</item>
+        <item name="customDuration">-1</item>
         <item name="enableDevelopPreview">true</item>
         <item name="skeletonColor">@color/defaultSkeletonColor</item>
-        <item name="skeletonEffectStrokeWidth">@dimen/defaultSkeletonStrokeWidth</item>
-        <item name="skeletonEffectBlurWidth">@dimen/defaultSkeletonBlurWidth</item>
-        <item name="skeletonEffectLightenFactor">0.2</item>
+        <item name="shimmerStrokeWidth">@dimen/defaultSkeletonStrokeWidth</item>
+        <item name="shimmerBlurWidth">@dimen/defaultSkeletonBlurWidth</item>
+        <item name="shimmerLightenFactor">0.2</item>
         <item name="skeletonCornerRadius">@dimen/defaultSkeletonCornerRadius</item>
         <item name="splitSkeletonTextByLines">true</item>
         <item name="clipToText">true</item>

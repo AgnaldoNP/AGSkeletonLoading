@@ -16,12 +16,12 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     private var animationDuration: Int = Duration.MEDIUM.millis()
 
     private var currentAnimationProgress: Float = 0F
-    private var initWithLoading: Boolean = true
+    private var autoStart: Boolean = true
     private var enableDevelopPreview: Boolean = true
     private var skeletonColor: Int = Color.rgb(230, 230, 230)
-    private var skeletonEffectStrokeWidth: Float = 30F
-    private var skeletonEffectBlurWidth: Float = 50F
-    private var skeletonEffectLightenFactor: Float = 0.2F
+    private var shimmerStrokeWidth: Float = 30F
+    private var shimmerBlurWidth: Float = 50F
+    private var shimmerLightenFactor: Float = 0.2F
     protected var splitSkeletonTextByLines: Boolean = true
     protected var clipToText: Boolean = true
 
@@ -69,13 +69,13 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
                 R.style.DefaultSkeletonView
             )
 
-            initWithLoading = typedArray.getBoolean(
-                R.styleable.SkeletonView_initWithLoading,
-                initWithLoading
+            autoStart = typedArray.getBoolean(
+                R.styleable.SkeletonView_autoStart,
+                autoStart
             )
 
             enableDevelopPreview = typedArray.getBoolean(
-                R.styleable.SkeletonView_initWithLoading,
+                R.styleable.SkeletonView_autoStart,
                 enableDevelopPreview
             )
 
@@ -91,13 +91,13 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
             animationDuration = Duration.get(
                 typedArray.getInteger(
-                    R.styleable.SkeletonView_cycleDuration,
+                    R.styleable.SkeletonView_duration,
                     Duration.MEDIUM.ordinal
                 )
             ).millis()
 
             typedArray.getInteger(
-                R.styleable.SkeletonView_customCycleDuration, -1
+                R.styleable.SkeletonView_customDuration, -1
             ).takeIf { it > 0 }?.run { animationDuration = this }
 
             skeletonColor = typedArray.getColor(
@@ -105,18 +105,18 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
                 skeletonColor
             )
 
-            skeletonEffectStrokeWidth = typedArray.getDimensionPixelSize(
-                R.styleable.SkeletonView_skeletonEffectStrokeWidth,
-                skeletonEffectStrokeWidth.toInt()
+            shimmerStrokeWidth = typedArray.getDimensionPixelSize(
+                R.styleable.SkeletonView_shimmerStrokeWidth,
+                shimmerStrokeWidth.toInt()
             ).toFloat()
 
-            skeletonEffectBlurWidth = typedArray.getDimensionPixelSize(
-                R.styleable.SkeletonView_skeletonEffectBlurWidth,
-                skeletonEffectBlurWidth.toInt()
+            shimmerBlurWidth = typedArray.getDimensionPixelSize(
+                R.styleable.SkeletonView_shimmerBlurWidth,
+                shimmerBlurWidth.toInt()
             ).toFloat()
 
-            skeletonEffectLightenFactor = typedArray.getFloat(
-                R.styleable.SkeletonView_skeletonEffectLightenFactor, skeletonEffectLightenFactor
+            shimmerLightenFactor = typedArray.getFloat(
+                R.styleable.SkeletonView_shimmerLightenFactor, shimmerLightenFactor
             )
 
             skeletonCornerRadius = typedArray.getDimensionPixelSize(
@@ -139,7 +139,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             )
 
         view.post {
-            if (initWithLoading) {
+            if (autoStart) {
                 startLoading()
             }
         }
@@ -151,12 +151,12 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         skeletonPaint.color = skeletonColor
 
         skeletonEffectPaint.apply {
-            strokeWidth = skeletonEffectStrokeWidth
+            strokeWidth = shimmerStrokeWidth
             color = AnimationUtils.lightenColor(
                 skeletonColor,
-                skeletonEffectLightenFactor
+                shimmerLightenFactor
             )
-            maskFilter = BlurMaskFilter(skeletonEffectBlurWidth, BlurMaskFilter.Blur.NORMAL)
+            maskFilter = BlurMaskFilter(shimmerBlurWidth, BlurMaskFilter.Blur.NORMAL)
         }
     }
 
@@ -214,7 +214,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
                     return true
                 }
             } else {
-                if (initWithLoading && enableDevelopPreview) {
+                if (autoStart && enableDevelopPreview) {
                     createSkeleton()
                     skeletonPaths.forEach { path ->
                         canvas.drawPath(path, skeletonPaint)
