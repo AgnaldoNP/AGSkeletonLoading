@@ -11,7 +11,7 @@
         <item name="skeletonEffectLightenFactor">0.2</item>
         <item name="skeletonCornerRadius">@dimen/defaultSkeletonCornerRadius</item>
         <item name="splitSkeletonTextByLines">true</item>
-        <item name="reduceToTextSpace">true</item>
+        <item name="clipToText">true</item>
     </style>
 
 </resources>

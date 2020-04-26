@@ -7,7 +7,7 @@ import android.widget.TextView
 
 fun TextView.getAllLineBounds(
     splitSkeletonTextByLines: Boolean = true,
-    reduceToTextSpace: Boolean = true
+    clipToText: Boolean = true
 ): ArrayList<Rect> {
     val allLineBounds = ArrayList<Rect>()
     val lineCount = this.lineCount
@@ -17,7 +17,7 @@ fun TextView.getAllLineBounds(
                 getSkeletonLineBounds(
                     this, line,
                     splitSkeletonTextByLines,
-                    reduceToTextSpace
+                    clipToText
                 )
             )
         }
@@ -26,7 +26,7 @@ fun TextView.getAllLineBounds(
             getSkeletonLineBounds(
                 this, 0,
                 splitSkeletonTextByLines,
-                reduceToTextSpace
+                clipToText
             )
         )
     }
@@ -37,7 +37,7 @@ private fun getSkeletonLineBounds(
     textView: TextView,
     line: Int,
     splitSkeletonTextByLines: Boolean,
-    reduceToTextSpace: Boolean
+    clipToText: Boolean
 ): Rect {
     val lineCount = textView.lineCount
     val lineSpacingExtra = textView.lineSpacingExtra
@@ -53,7 +53,7 @@ private fun getSkeletonLineBounds(
         }
     }
 
-    if (reduceToTextSpace) {
+    if (clipToText) {
         val boundWidth = lineBounds.width()
         val lineWidth = textView.layout.getLineWidth(line)
         val whiteSpace = boundWidth - lineWidth

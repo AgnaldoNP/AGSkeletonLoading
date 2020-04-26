@@ -18,7 +18,7 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
 
         if (view is TextView && view !is Button && view !is EditText) {
             val allLineBounds = view.getAllLineBounds(
-                splitSkeletonTextByLines, reduceToTextSpace
+                splitSkeletonTextByLines, clipToText
             )
 
             allLineBounds.forEach { lineBound ->

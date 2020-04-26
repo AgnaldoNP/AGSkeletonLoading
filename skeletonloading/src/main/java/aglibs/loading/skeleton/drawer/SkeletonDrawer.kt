@@ -23,7 +23,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     private var skeletonEffectBlurWidth: Float = 50F
     private var skeletonEffectLightenFactor: Float = 0.2F
     protected var splitSkeletonTextByLines: Boolean = true
-    protected var reduceToTextSpace: Boolean = true
+    protected var clipToText: Boolean = true
 
     var skeletonCornerRadius: Float = 10F
     var disableAnimation: Boolean = false
@@ -84,9 +84,9 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
                 splitSkeletonTextByLines
             )
 
-            reduceToTextSpace = typedArray.getBoolean(
-                R.styleable.SkeletonView_reduceToTextSpace,
-                reduceToTextSpace
+            clipToText = typedArray.getBoolean(
+                R.styleable.SkeletonView_clipToText,
+                clipToText
             )
 
             animationDuration = Duration.get(

@@ -80,7 +80,7 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
 
             if (subView is TextView && subView !is Button && subView !is EditText) {
                 val allLineBounds = subView.getAllLineBounds(
-                    splitSkeletonTextByLines, reduceToTextSpace
+                    splitSkeletonTextByLines, clipToText
                 )
 
                 allLineBounds.forEach { lineBound ->
