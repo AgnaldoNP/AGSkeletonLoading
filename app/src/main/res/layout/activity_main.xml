@@ -29,6 +29,47 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <aglibs.loading.skeleton.layout.SkeletonFrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                app:reduceToTextSpace="true">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img027"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_email" />
+
+                    <TextView
+                        android:id="@+id/text026"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toEndOf="@+id/img027"
+                        android:text="Lorem Ipsum is simply dummy text" />
+
+                    <TextView
+                        android:id="@+id/text025"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text026"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_toEndOf="@+id/img027"
+                        android:text="Lorem Ipsum Text" />
+
+                </RelativeLayout>
+
+            </aglibs.loading.skeleton.layout.SkeletonFrameLayout>
+
             <aglibs.loading.skeleton.layout.SkeletonRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
