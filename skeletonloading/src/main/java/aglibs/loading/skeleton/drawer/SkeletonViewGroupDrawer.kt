@@ -11,9 +11,9 @@ import android.widget.TextView
 import androidx.core.graphics.toRect
 
 @Suppress("unused")
-class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(viewGroup) {
+open class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(viewGroup) {
 
-    private val visibilityViewsMap = hashMapOf<View, Int>()
+    protected val visibilityViewsMap = hashMapOf<View, Int>()
 
     override fun startLoading() {
         getAllVisibilityNonViewGroupViews(viewGroup, visibilityViewsMap)
@@ -32,7 +32,7 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
         }
     }
 
-    private fun getAllVisibilityNonViewGroupViews(subview: View, viewsMap: HashMap<View, Int>) {
+    protected fun getAllVisibilityNonViewGroupViews(subview: View, viewsMap: HashMap<View, Int>) {
         subview.takeIf { subview is ViewGroup }?.let {
             for (i in 0 until (subview as ViewGroup).childCount) {
                 getAllVisibilityNonViewGroupViews(subview.getChildAt(i), viewsMap)
@@ -43,34 +43,33 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
         }
     }
 
-    private fun getPathLeft(subView: View): Int {
+    private fun getPathLeft(subView: View?): Int {
         var left = 0
         var view = subView
 
         do {
             if (viewGroup != view) {
-                left += view.left
+                left += view?.left ?: 0
             }
-            view = view.parent as View
-        } while (view != viewGroup.parent)
+            view = view?.parent as? View
+        } while (view != viewGroup.parent && view != null)
         return left
     }
 
-    private fun getPathTop(subView: View): Int {
+    private fun getPathTop(subView: View?): Int {
         var top = 0
         var view = subView
 
         do {
             if (viewGroup != view) {
-                top += view.top
+                top += view?.top ?: 0
             }
-            view = view.parent as View
-        } while (view != viewGroup.parent)
+            view = view?.parent as? View
+        } while (view != viewGroup.parent && view != null)
         return top
     }
 
     override fun createSkeleton() {
-        skeletonPaths.clear()
         skeletonRects.clear()
 
         visibilityViewsMap.forEach { map ->
@@ -85,14 +84,12 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
 
                 allLineBounds.forEach { lineBound ->
                     lineBound.offset(left.toInt(), top.toInt())
-                    skeletonPaths.add(Path().also { path ->
-                        path.addRoundRect(
-                            RectF(lineBound),
-                            skeletonCornerRadius,
-                            skeletonCornerRadius,
-                            Path.Direction.CCW
-                        )
-                    })
+                    skeletonPath.addRoundRect(
+                        RectF(lineBound),
+                        skeletonCornerRadius,
+                        skeletonCornerRadius,
+                        Path.Direction.CCW
+                    )
                     skeletonRects.add(lineBound)
                 }
             } else if (subView is ISkeletonDrawer) {
@@ -102,13 +99,11 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
 
                 skeletonDrawerRects.forEach { skeletonRect ->
                     skeletonRect.offset(left.toInt(), top.toInt())
-                    skeletonPaths.add(Path().also { path ->
-                        path.addRoundRect(
-                            RectF(skeletonRect),
-                            radius, radius,
-                            Path.Direction.CCW
-                        )
-                    })
+                    skeletonPath.addRoundRect(
+                        RectF(skeletonRect),
+                        radius, radius,
+                        Path.Direction.CCW
+                    )
                     skeletonRects.add(skeletonRect)
                 }
 
@@ -119,15 +114,13 @@ class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(view
                 val bottom = viewHeight + top
                 val rect = RectF(left, top, right, bottom)
 
-                skeletonPaths.add(Path().also { path ->
-                    path.addRoundRect(
-                        rect,
-                        skeletonCornerRadius,
-                        skeletonCornerRadius,
-                        Path.Direction.CCW
-                    )
-                    skeletonRects.add(rect.toRect())
-                })
+                skeletonPath.addRoundRect(
+                    rect,
+                    skeletonCornerRadius,
+                    skeletonCornerRadius,
+                    Path.Direction.CCW
+                )
+                skeletonRects.add(rect.toRect())
             }
         }
     }

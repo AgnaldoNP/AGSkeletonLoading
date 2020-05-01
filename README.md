@@ -76,6 +76,7 @@ skeletonLayout.stopLoading()
 ```
 
 ### Skeleton Available loading views
+ - SkeletonListView
  - SkeletonLinearLayout
  - SkeletonRelativeLayout
  - SkeletonFrameLayout
@@ -99,8 +100,8 @@ skeletonLayout.stopLoading()
 | skeletonCornerRadius     |                dimension                |     5dp     |
 | duration                 | enum - shortCycle mediumCycle longCycle | mediumCycle |
 | customDuration           |                 integer                 |      -      |
-
-These configs also can be changes at runtime by calling their set methods
+| skeletonViewHolderItem   |                 reference               |      -      |
+| skeletonViewHolderAmount |                 integer                 |      -      |
 
 ## Contributions and Support
 Contributions are welcome. Create a new pull request in order to submit your fixes and they shall be merged after moderation. In case of any issues, bugs or any suggestions, either create a new issue or post comments in already active relevant issues

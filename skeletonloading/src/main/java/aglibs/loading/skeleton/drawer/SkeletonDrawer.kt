@@ -25,6 +25,9 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
     protected var splitSkeletonTextByLines: Boolean = true
     protected var clipToText: Boolean = true
 
+    protected var skeletonViewHolderItem: Int = -1
+    protected var skeletonViewHolderAmount: Int = -1
+
     var skeletonCornerRadius: Float = 10F
     var disableAnimation: Boolean = false
 
@@ -37,8 +40,8 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         it.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)
     }
 
-    protected val skeletonPaths: ArrayList<Path> = arrayListOf()
     protected val skeletonRects: ArrayList<Rect> = arrayListOf()
+    protected val skeletonPath: Path = Path()
     private val effectPath: Path = Path()
 
     enum class Duration(val duration: Int) {
@@ -124,6 +127,15 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
                 skeletonCornerRadius.toInt()
             ).toFloat()
 
+            skeletonViewHolderItem = typedArray.getResourceId(
+                R.styleable.SkeletonView_skeletonViewHolderItem,
+                skeletonViewHolderItem
+            )
+            skeletonViewHolderAmount = typedArray.getInteger(
+                R.styleable.SkeletonView_skeletonViewHolderAmount,
+                skeletonViewHolderAmount
+            )
+
             typedArray.recycle()
         }
 
@@ -191,7 +203,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         return skeletonRects
     }
 
-    private fun createSkeletonEffect() {
+    protected open fun createSkeletonEffect() {
         val viewWidth = view.width
         val viewHeight = view.height
 
@@ -205,20 +217,16 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         canvas?.let {
             if (!view.isInEditMode) {
                 if (isLoading()) {
-                    skeletonPaths.forEach { path ->
-                        canvas.drawPath(path, skeletonPaint)
-                        if (!disableAnimation) {
-                            canvas.drawPath(effectPath, skeletonEffectPaint)
-                        }
+                    canvas.drawPath(skeletonPath, skeletonPaint)
+                    if (!disableAnimation) {
+                        canvas.drawPath(effectPath, skeletonEffectPaint)
                     }
                     return true
                 }
             } else {
                 if (autoStart && enableDevelopPreview) {
                     createSkeleton()
-                    skeletonPaths.forEach { path ->
-                        canvas.drawPath(path, skeletonPaint)
-                    }
+                    canvas.drawPath(skeletonPath, skeletonPaint)
                     return true
                 }
             }

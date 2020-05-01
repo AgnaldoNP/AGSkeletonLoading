@@ -13,7 +13,6 @@ import android.widget.TextView
 class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
 
     override fun createSkeleton() {
-        skeletonPaths.clear()
         skeletonRects.clear()
 
         if (view is TextView && view !is Button && view !is EditText) {
@@ -22,14 +21,12 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
             )
 
             allLineBounds.forEach { lineBound ->
-                skeletonPaths.add(Path().also { path ->
-                    path.addRoundRect(
-                        RectF(lineBound),
-                        skeletonCornerRadius,
-                        skeletonCornerRadius,
-                        Path.Direction.CCW
-                    )
-                })
+                skeletonPath.addRoundRect(
+                    RectF(lineBound),
+                    skeletonCornerRadius,
+                    skeletonCornerRadius,
+                    Path.Direction.CCW
+                )
                 skeletonRects.add(lineBound)
             }
         } else {
@@ -37,15 +34,12 @@ class SkeletonViewDrawer(private val view: View) : SkeletonDrawer(view) {
             val viewHeight = view.height
 
             val rect = Rect(0, 0, viewWidth, viewHeight)
-
-            skeletonPaths.add(Path().also { path ->
-                path.addRoundRect(
-                    RectF(rect),
-                    skeletonCornerRadius,
-                    skeletonCornerRadius,
-                    Path.Direction.CCW
-                )
-            })
+            skeletonPath.addRoundRect(
+                RectF(rect),
+                skeletonCornerRadius,
+                skeletonCornerRadius,
+                Path.Direction.CCW
+            )
             skeletonRects.add(rect)
         }
     }

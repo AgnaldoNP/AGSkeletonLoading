@@ -11,6 +11,8 @@
         <attr name="shimmerBlurWidth" format="dimension" />
         <attr name="shimmerLightenFactor" format="float" />
         <attr name="skeletonCornerRadius" format="dimension" />
+        <attr name="skeletonViewHolderItem" format="reference" />
+        <attr name="skeletonViewHolderAmount" format="integer" />
 
         <attr name="customDuration" format="integer" />
         <attr name="duration" format="enum">

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#666"
+    android:background="#000"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     tools:context=".MainActivity">
@@ -29,499 +29,506 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <aglibs.loading.skeleton.layout.SkeletonFrameLayout
+            <aglibs.loading.skeleton.layout.SkeletonListView
+                android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="400dp"
                 android:layout_marginBottom="20dp"
-                app:clipToText="true">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/img027"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/ic_email" />
-
-                    <TextView
-                        android:id="@+id/text026"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_toEndOf="@+id/img027"
-                        android:text="Lorem Ipsum is simply dummy text" />
-
-                    <TextView
-                        android:id="@+id/text025"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/text026"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_toEndOf="@+id/img027"
-                        android:text="Lorem Ipsum Text" />
-
-                </RelativeLayout>
-
-            </aglibs.loading.skeleton.layout.SkeletonFrameLayout>
-
-            <aglibs.loading.skeleton.layout.SkeletonRelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                app:clipToText="false">
-
-                <ImageView
-                    android:id="@+id/img017"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email" />
-
-                <TextView
-                    android:id="@+id/text016"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_toEndOf="@+id/img017"
-                    android:text="Lorem Ipsum is simply dummy text" />
-
-                <TextView
-                    android:id="@+id/text015"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/text016"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_toEndOf="@+id/img017"
-                    android:text="Lorem Ipsum Text" />
-
-            </aglibs.loading.skeleton.layout.SkeletonRelativeLayout>
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="end"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                android:textAlignment="textEnd"
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                android:textAlignment="textStart"
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                android:textAlignment="viewEnd"
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                android:textAlignment="viewStart"
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:lineSpacingExtra="4dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-                android:textAlignment="center"
-                app:initWithLoading="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:splitSkeletonTextByLines="true" />
-
-            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
-
-                <aglibs.loading.skeleton.view.SkeletonImageView
-                    android:id="@+id/img012"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/text011"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Lorem Ipsum is simply dummy text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img012"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/text010"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Lorem Ipsum Text"
-                    app:layout_constraintStart_toEndOf="@+id/img012"
-                    app:layout_constraintTop_toBottomOf="@id/text011" />
-
-            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>
-
-
-            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
-
-                <ImageView
-                    android:id="@+id/img007"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/text006"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Lorem Ipsum is simply dummy text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img007"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/text005"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Lorem Ipsum Text"
-                    app:layout_constraintStart_toEndOf="@+id/img007"
-                    app:layout_constraintTop_toBottomOf="@id/text006" />
-
-            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>
-
-
-            <aglibs.loading.skeleton.layout.SkeletonLinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:minHeight="50dp"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                app:initWithLoading="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="1">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="4dp"
-                        android:src="@drawable/ic_email" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="top"
-                        android:orientation="vertical"
-                        android:paddingStart="4dp"
-                        android:paddingTop="2dp"
-                        android:paddingEnd="0dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Lorem Ipsum is simply dummy text" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="Lorem Ipsum Text" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </aglibs.loading.skeleton.layout.SkeletonLinearLayout>
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:id="@+id/skeletonTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="What is Lorem Ipsum?"
-                app:initWithLoading="true" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:id="@+id/skeletonTextView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Lorem Ipsum is simply dummy text" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:id="@+id/skeletonTextView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:id="@+id/skeletonTextView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Lorem Ipsum" />
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:id="@+id/skeletonTextView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginTop="8dp"
-                android:text="Lorem Ipsum" />
-
-
-            <aglibs.loading.skeleton.view.SkeletonTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:gravity="center"
-                android:text="Lorem Ipsum"
-                app:initWithLoading="false" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:layout_marginBottom="10dp"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <aglibs.loading.skeleton.view.SkeletonImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_email"
-                    app:initWithLoading="true"
-                    app:skeletonCornerRadius="10dp" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="top"
-                    android:orientation="vertical"
-                    android:paddingStart="4dp"
-                    android:paddingTop="2dp"
-                    android:paddingEnd="0dp">
-
-                    <aglibs.loading.skeleton.view.SkeletonTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Lorem Ipsum is simply dummy text"
-                        app:initWithLoading="false" />
-
-                    <aglibs.loading.skeleton.view.SkeletonTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Lorem Ipsum Text"
-                        app:initWithLoading="false" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <aglibs.loading.skeleton.view.SkeletonImageView
-                    android:id="@+id/img001"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email"
-                    app:initWithLoading="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:skeletonCornerRadius="10dp" />
-
-                <aglibs.loading.skeleton.view.SkeletonTextView
-                    android:id="@+id/text001"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="2dp"
-                    android:text="Lorem Ipsum is simply dummy text"
-                    app:initWithLoading="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img001"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <aglibs.loading.skeleton.view.SkeletonTextView
-                    android:id="@+id/text002"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="Lorem Ipsum Text"
-                    app:initWithLoading="false"
-                    app:layout_constraintStart_toEndOf="@+id/img001"
-                    app:layout_constraintTop_toBottomOf="@id/text001" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="50dp">
-
-                <aglibs.loading.skeleton.view.SkeletonImageView
-                    android:id="@+id/img002"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email"
-                    app:initWithLoading="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:skeletonCornerRadius="10dp" />
-
-                <aglibs.loading.skeleton.view.SkeletonTextView
-                    android:id="@+id/text003"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Lorem Ipsum is simply dummy text\nLorem Ipsum is simply dummy text"
-                    app:initWithLoading="true"
-                    app:layout_constraintBottom_toBottomOf="@id/img002"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img002"
-                    app:layout_constraintTop_toTopOf="@id/img002" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <aglibs.loading.skeleton.view.SkeletonImageView
-                    android:id="@+id/img003"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_email"
-                    app:initWithLoading="true"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:skeletonCornerRadius="30dp" />
-
-                <aglibs.loading.skeleton.view.SkeletonTextView
-                    android:id="@+id/text004"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="8dp"
-                    android:text="Lorem Ipsum is simply dummy text\nLorem Ipsum is simply dummy text"
-                    app:initWithLoading="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/img003"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <aglibs.loading.skeleton.view.SkeletonButtonView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Lorem Ipsum"
-                app:initWithLoading="true" />
+                app:skeletonViewHolderItem="@layout/item_list"
+                tools:listitem="@layout/item_list" />
+
+<!--            <aglibs.loading.skeleton.layout.SkeletonFrameLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                app:clipToText="true">-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
+
+<!--                    <ImageView-->
+<!--                        android:id="@+id/img027"-->
+<!--                        android:layout_width="50dp"-->
+<!--                        android:layout_height="50dp"-->
+<!--                        android:src="@drawable/ic_email" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/text026"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="2dp"-->
+<!--                        android:layout_toEndOf="@+id/img027"-->
+<!--                        android:text="Lorem Ipsum is simply dummy text" />-->
+
+<!--                    <TextView-->
+<!--                        android:id="@+id/text025"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_below="@+id/text026"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:layout_toEndOf="@+id/img027"-->
+<!--                        android:text="Lorem Ipsum Text" />-->
+
+<!--                </RelativeLayout>-->
+
+<!--            </aglibs.loading.skeleton.layout.SkeletonFrameLayout>-->
+
+            <!--            <aglibs.loading.skeleton.layout.SkeletonRelativeLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                app:clipToText="false">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/img017"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text016"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_alignParentEnd="true"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="2dp"-->
+            <!--                    android:layout_toEndOf="@+id/img017"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text015"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_below="@+id/text016"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:layout_toEndOf="@+id/img017"-->
+            <!--                    android:text="Lorem Ipsum Text" />-->
+
+            <!--            </aglibs.loading.skeleton.layout.SkeletonRelativeLayout>-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:gravity="end"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:gravity="center"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                android:textAlignment="textEnd"-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                android:textAlignment="textStart"-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                android:textAlignment="viewEnd"-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                android:textAlignment="viewStart"-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:lineSpacingExtra="4dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."-->
+            <!--                android:textAlignment="center"-->
+            <!--                app:autoStart="true"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:splitSkeletonTextByLines="true" />-->
+
+            <!--            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp">-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonImageView-->
+            <!--                    android:id="@+id/img012"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text011"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="2dp"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img012"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text010"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:text="Lorem Ipsum Text"-->
+            <!--                    app:layout_constraintStart_toEndOf="@+id/img012"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/text011" />-->
+
+            <!--            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>-->
+
+
+            <!--            <aglibs.loading.skeleton.layout.SkeletonConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="20dp">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/img007"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text006"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="2dp"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img007"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <TextView-->
+            <!--                    android:id="@+id/text005"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:text="Lorem Ipsum Text"-->
+            <!--                    app:layout_constraintStart_toEndOf="@+id/img007"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/text006" />-->
+
+            <!--            </aglibs.loading.skeleton.layout.SkeletonConstraintLayout>-->
+
+
+            <!--            <aglibs.loading.skeleton.layout.SkeletonLinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginBottom="30dp"-->
+            <!--                android:minHeight="50dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:weightSum="1"-->
+            <!--                app:autoStart="true">-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="horizontal"-->
+            <!--                    android:weightSum="1">-->
+
+            <!--                    <ImageView-->
+            <!--                        android:layout_width="50dp"-->
+            <!--                        android:layout_height="50dp"-->
+            <!--                        android:layout_gravity="center"-->
+            <!--                        android:layout_marginEnd="4dp"-->
+            <!--                        android:src="@drawable/ic_email" />-->
+
+            <!--                    <LinearLayout-->
+            <!--                        android:layout_width="0dp"-->
+            <!--                        android:layout_height="match_parent"-->
+            <!--                        android:layout_weight="1"-->
+            <!--                        android:gravity="top"-->
+            <!--                        android:orientation="vertical"-->
+            <!--                        android:paddingStart="4dp"-->
+            <!--                        android:paddingTop="2dp"-->
+            <!--                        android:paddingEnd="0dp">-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:text="Lorem Ipsum is simply dummy text" />-->
+
+            <!--                        <TextView-->
+            <!--                            android:layout_width="wrap_content"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            android:layout_marginTop="8dp"-->
+            <!--                            android:text="Lorem Ipsum Text" />-->
+
+            <!--                    </LinearLayout>-->
+
+            <!--                </LinearLayout>-->
+
+            <!--            </aglibs.loading.skeleton.layout.SkeletonLinearLayout>-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:id="@+id/skeletonTextView"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="What is Lorem Ipsum?"-->
+            <!--                app:autoStart="true" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:id="@+id/skeletonTextView2"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:id="@+id/skeletonTextView3"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:id="@+id/skeletonTextView4"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:text="Lorem Ipsum" />-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:id="@+id/skeletonTextView5"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="end"-->
+            <!--                android:layout_marginTop="8dp"-->
+            <!--                android:text="Lorem Ipsum" />-->
+
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="28dp"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="Lorem Ipsum"-->
+            <!--                app:autoStart="false" />-->
+
+
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="28dp"-->
+            <!--                android:layout_marginBottom="10dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:weightSum="1">-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonImageView-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:layout_marginEnd="4dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:skeletonCornerRadius="10dp" />-->
+
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:layout_weight="1"-->
+            <!--                    android:gravity="top"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:paddingStart="4dp"-->
+            <!--                    android:paddingTop="2dp"-->
+            <!--                    android:paddingEnd="0dp">-->
+
+            <!--                    <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Lorem Ipsum is simply dummy text"-->
+            <!--                        app:autoStart="false" />-->
+
+            <!--                    <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:layout_marginTop="8dp"-->
+            <!--                        android:text="Lorem Ipsum Text"-->
+            <!--                        app:autoStart="false" />-->
+
+            <!--                </LinearLayout>-->
+
+            <!--            </LinearLayout>-->
+
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content">-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonImageView-->
+            <!--                    android:id="@+id/img001"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:skeletonCornerRadius="10dp" />-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                    android:id="@+id/text001"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="2dp"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text"-->
+            <!--                    app:autoStart="false"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img001"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                    android:id="@+id/text002"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:layout_marginTop="8dp"-->
+            <!--                    android:text="Lorem Ipsum Text"-->
+            <!--                    app:autoStart="false"-->
+            <!--                    app:layout_constraintStart_toEndOf="@+id/img001"-->
+            <!--                    app:layout_constraintTop_toBottomOf="@id/text001" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="50dp">-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonImageView-->
+            <!--                    android:id="@+id/img002"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:skeletonCornerRadius="10dp" />-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                    android:id="@+id/text003"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="0dp"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text\nLorem Ipsum is simply dummy text"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="@id/img002"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img002"-->
+            <!--                    app:layout_constraintTop_toTopOf="@id/img002" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp">-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonImageView-->
+            <!--                    android:id="@+id/img003"-->
+            <!--                    android:layout_width="50dp"-->
+            <!--                    android:layout_height="50dp"-->
+            <!--                    android:src="@drawable/ic_email"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:layout_constraintStart_toStartOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:skeletonCornerRadius="30dp" />-->
+
+            <!--                <aglibs.loading.skeleton.view.SkeletonTextView-->
+            <!--                    android:id="@+id/text004"-->
+            <!--                    android:layout_width="0dp"-->
+            <!--                    android:layout_height="0dp"-->
+            <!--                    android:layout_marginStart="8dp"-->
+            <!--                    android:text="Lorem Ipsum is simply dummy text\nLorem Ipsum is simply dummy text"-->
+            <!--                    app:autoStart="true"-->
+            <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintStart_toEndOf="@id/img003"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+            <!--            <aglibs.loading.skeleton.view.SkeletonButtonView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="10dp"-->
+            <!--                android:text="Lorem Ipsum"-->
+            <!--                app:autoStart="true" />-->
 
         </LinearLayout>
 
