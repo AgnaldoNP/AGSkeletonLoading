@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import kotlin.math.ceil
 import kotlin.math.truncate
 
 class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDrawer(viewGroup) {
@@ -66,18 +67,28 @@ class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDra
 
     override fun createSkeleton() {
         if (skeletonRects.isEmpty()) {
+            if (height == 0)
+                return
+
+            val amount = if (skeletonViewHolderAmount == -1) {
+                if (skeletonViewHolderTruncate) {
+                    truncate((viewGroup.height / height.toFloat())).toInt()
+                } else {
+                    ceil((viewGroup.height / height.toFloat())).toInt()
+                }
+            } else {
+                skeletonViewHolderAmount
+            }
+
+            if (amount == 0)
+                return
+
             super.createSkeleton()
             val rects = arrayListOf<Rect>()
             skeletonRects.forEach { rect ->
-                val amount = if (skeletonViewHolderAmount == -1) {
-                    truncate((viewGroup.height / height.toFloat())).toInt()
-                } else {
-                    skeletonViewHolderAmount
-                }
-
-                for (i in 1..amount) {
+                for (i in 2..amount) {
                     Rect(rect).also {
-                        it.offset(0, height * i)
+                        it.offset(0, (height * (i - 1)))
                         rects.add(it)
                         skeletonPath.addRoundRect(
                             RectF(it),

@@ -27,6 +27,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
     protected var skeletonViewHolderItem: Int = -1
     protected var skeletonViewHolderAmount: Int = -1
+    protected var skeletonViewHolderTruncate: Boolean = false
 
     var skeletonCornerRadius: Float = 10F
     var disableAnimation: Boolean = false
@@ -134,6 +135,10 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             skeletonViewHolderAmount = typedArray.getInteger(
                 R.styleable.SkeletonView_skeletonViewHolderAmount,
                 skeletonViewHolderAmount
+            )
+            skeletonViewHolderTruncate = typedArray.getBoolean(
+                R.styleable.SkeletonView_skeletonViewHolderTruncate,
+                skeletonViewHolderTruncate
             )
 
             typedArray.recycle()

@@ -29,13 +29,23 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <aglibs.loading.skeleton.layout.SkeletonListView
+
+            <aglibs.loading.skeleton.layout.SkeletonRecyclerView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:layout_marginBottom="20dp"
                 app:skeletonViewHolderItem="@layout/item_list"
-                tools:listitem="@layout/item_list" />
+                app:skeletonViewHolderAmount="-1"
+                app:skeletonViewHolderTruncate="true"/>
+
+<!--            <aglibs.loading.skeleton.layout.SkeletonListView-->
+<!--                android:id="@+id/listView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="400dp"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                app:skeletonViewHolderItem="@layout/item_list"-->
+<!--                tools:listitem="@layout/item_list" />-->
 
 <!--            <aglibs.loading.skeleton.layout.SkeletonFrameLayout-->
 <!--                android:layout_width="match_parent"-->

@@ -75,8 +75,9 @@ skeletonLayout.startLoading()
 skeletonLayout.stopLoading()
 ```
 
-### Skeleton Available loading views
- - SkeletonListView
+### Available Skeleton loading views
+ - [SkeletonRecyclerView](https://github.com/AgnaldoNP/AGSkeletonLoading#skeletonlistview-and-skeletonrecyclerview)
+ - [SkeletonListView](https://github.com/AgnaldoNP/AGSkeletonLoading#skeletonlistview-and-skeletonrecyclerview)
  - SkeletonLinearLayout
  - SkeletonRelativeLayout
  - SkeletonFrameLayout
@@ -87,21 +88,119 @@ skeletonLayout.stopLoading()
  - SkeletonImageView
 
 ### Options
-| Property                 |               Value / Type              |   Default   |
-|--------------------------|:---------------------------------------:|:-----------:|
-| autoStart                |                 boolean                 |     true    |
-| enableDevelopPreview     |                 boolean                 |     true    |
-| splitSkeletonTextByLines |                 boolean                 |     true    |
-| clipToText               |                 drawable                |     true    |
-| skeletonColor            |                  color                  |   #E6E6E6   |
-| shimmerStrokeWidth       |                dimension                |     30dp    |
-| shimmerBlurWidth         |                dimension                |     25dp    |
-| shimmerLightenFactor     |                  floar                  |     0.2     |
-| skeletonCornerRadius     |                dimension                |     5dp     |
-| duration                 | enum - shortCycle mediumCycle longCycle | mediumCycle |
-| customDuration           |                 integer                 |      -      |
-| skeletonViewHolderItem   |                 reference               |      -      |
-| skeletonViewHolderAmount |                 integer                 |      -      |
+| Property                   |               Value / Type              |   Default   |
+|----------------------------|:---------------------------------------:|:-----------:|
+| autoStart                  |                 boolean                 |     true    |
+| enableDevelopPreview       |                 boolean                 |     true    |
+| splitSkeletonTextByLines   |                 boolean                 |     true    |
+| clipToText                 |                 drawable                |     true    |
+| skeletonColor              |                  color                  |   #E6E6E6   |
+| shimmerStrokeWidth         |                dimension                |     30dp    |
+| shimmerBlurWidth           |                dimension                |     25dp    |
+| shimmerLightenFactor       |                  floar                  |     0.2     |
+| skeletonCornerRadius       |                dimension                |     5dp     |
+| duration                   | enum - shortCycle mediumCycle longCycle | mediumCycle |
+| customDuration             |                 integer                 |      -      |
+| skeletonViewHolderItem     |                 reference               |      -      |
+| skeletonViewHolderAmount   |                 integer                 |      -      |
+| skeletonViewHolderTruncate |                 boolean                 |    false    |
+>All these properties can be referenced in any skeleton layout but can make no effect depending on layout used
+
+### Commom properties
+The Properties bellow has effect for all skeleton views loading
+ - **autoStart**
+   - Define if the layout automatic start loading as soon as it is inflated
+ - **enableDevelopPreview**
+   - Define if it shold be shown on Layout Editor while developing. This can not work pretty well with skeleton ViewGroups
+ - **splitSkeletonTextByLines**
+   - If the layout or some inner layout is an EditText, it defines if the skeleton considers each line to be drawn or if its drawn as only one rectangle.
+   > If true, lineSpacingExtra should be setted to separate the rectangles.
+ - **clipToText**
+   - If the layout or some inner layout is an EditText, it defines if the skeleton should be drawn restricted to text and not to the entire layout
+ - **skeletonColor**
+   - The color used to draw the skeleton rectangles
+ - **shimmerStrokeWidth**
+   - Width of the shimmer effect. It works together with _shimmerBlurWidth_
+ - **shimmerBlueWidth**
+   - Width of the blur effect used as mask on _shimmerStrokeWidth_
+ - **shimmerLightenFactor**
+   - Lighten factor applied on _skeletonColor_ to be used on shimmer effect, tipically it is from 0 to 1 depending on the _skeletonColor_
+ - **skeletonCornerRadius**
+   - Size of the skeleton rectangle corners radius
+ - **duration**
+   - Time to shimmer effect be applied from the start of layout to end
+ - **customDuration**
+   - Customized _duration_
+
+
+### SkeletonListView and SkeletonRecyclerView
+If you want to build a list using ListView or RecyclerView with a skeleton loading you need to create a layout that represents the item list.
+Once the layout is created need to reference it by adding *skeletonViewHolderItem* property, as you can see int the snippet bellow.
+
+#### *list_item.xml*
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="2dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="2dp"
+    android:paddingBottom="10dp"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/img017"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_email" />
+
+    <TextView
+        android:id="@+id/text016"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/img017"
+        android:text="Lorem Ipsum is simply dummy text" />
+
+    <TextView
+        android:id="@+id/text015"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text016"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/img017"
+        android:text="Lorem Ipsum Text" />
+
+</RelativeLayout>
+```
+> It's important that the layout has some content to be possible calculate the rects the represents the skeletons
+
+#### Usage
+```xml
+<aglibs.loading.skeleton.layout.SkeletonListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:skeletonViewHolderItem="@layout/item_list"/>
+
+<aglibs.loading.skeleton.layout.SkeletonRecyclerView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:skeletonViewHolderItem="@layout/item_list"/>
+```
+
+#### SkeletonListView and SkeletonRecyclerView properties
+ - **skeletonViewHolderItem**
+   - Reference to layout to be used as view holder to skeleton
+ - **skeletonViewHolderAmount**
+   - If setted, is the number of skeletons to be drawn, otherwise it will be calculated at runtime
+ - **skeletonViewHolderTruncate**
+   - If true and _skeletonViewHolderAmount_ is not setted this property defines if the last item can be incompleted drawn
+
 
 ## Contributions and Support
 Contributions are welcome. Create a new pull request in order to submit your fixes and they shall be merged after moderation. In case of any issues, bugs or any suggestions, either create a new issue or post comments in already active relevant issues

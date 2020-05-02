@@ -13,6 +13,7 @@
         <item name="splitSkeletonTextByLines">true</item>
         <item name="clipToText">true</item>
         <item name="skeletonViewHolderAmount">-1</item>
+        <item name="skeletonViewHolderTruncate">false</item>
     </style>
 
 </resources>
