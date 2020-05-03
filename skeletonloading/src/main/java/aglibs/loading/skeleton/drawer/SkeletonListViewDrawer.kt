@@ -15,7 +15,7 @@ import kotlin.math.truncate
 
 class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDrawer(viewGroup) {
 
-    private var height = 0
+    internal var viewHolderHeight = 0
     private val windowManager: WindowManager = viewGroup.context
         .getSystemService(WINDOW_SERVICE) as WindowManager
 
@@ -42,7 +42,7 @@ class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDra
                         it.post {
                             visibilityViewsMap.clear()
                             getAllVisibilityNonViewGroupViews(view, visibilityViewsMap)
-                            height = view.height
+                            viewHolderHeight = view.height
                             createSkeleton()
                             setVisibilityForChildViews(it, View.GONE)
                             windowManager.removeView(view)
@@ -67,14 +67,14 @@ class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDra
 
     override fun createSkeleton() {
         if (skeletonRects.isEmpty()) {
-            if (height == 0)
+            if (viewHolderHeight == 0)
                 return
 
             val amount = if (skeletonViewHolderAmount == -1) {
                 if (skeletonViewHolderTruncate) {
-                    truncate((viewGroup.height / height.toFloat())).toInt()
+                    truncate((viewGroup.height / viewHolderHeight.toFloat())).toInt()
                 } else {
-                    ceil((viewGroup.height / height.toFloat())).toInt()
+                    ceil((viewGroup.height / viewHolderHeight.toFloat())).toInt()
                 }
             } else {
                 skeletonViewHolderAmount
@@ -88,7 +88,7 @@ class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDra
             skeletonRects.forEach { rect ->
                 for (i in 2..amount) {
                     Rect(rect).also {
-                        it.offset(0, (height * (i - 1)))
+                        it.offset(0, (viewHolderHeight * (i - 1)))
                         rects.add(it)
                         skeletonPath.addRoundRect(
                             RectF(it),

@@ -2,14 +2,13 @@ package aglibs.loading.skeleton.layout
 
 import aglibs.loading.skeleton.drawer.ISkeletonDrawer
 import aglibs.loading.skeleton.drawer.SkeletonListViewDrawer
-import aglibs.loading.skeleton.drawer.SkeletonViewGroupDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.view.View
-import android.widget.ListView
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlin.math.ceil
 
 class SkeletonRecyclerView @JvmOverloads constructor(
     context: Context,
@@ -37,6 +36,35 @@ class SkeletonRecyclerView @JvmOverloads constructor(
 
     override fun stopLoading() {
         skeletonDrawer.stopLoading()
+        notifyVisibleItems()
+    }
+
+    private fun notifyVisibleItems() {
+        adapter?.let {
+            var start = 0
+            var end = 0
+
+            layoutManager?.let { lm ->
+                when (lm) {
+                    is LinearLayoutManager -> {
+                        start = lm.findFirstVisibleItemPosition()
+                        end = lm.findLastVisibleItemPosition()
+                    }
+                    is GridLayoutManager -> {
+                        start = lm.findFirstVisibleItemPosition()
+                        end = lm.findLastVisibleItemPosition()
+                    }
+                    else -> {
+                        start = 0
+                        end = ceil((height / skeletonDrawer.viewHolderHeight.toFloat())).toInt()
+                    }
+                }
+            }
+
+            for (i in start..end) {
+                it.notifyItemChanged(i)
+            }
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {

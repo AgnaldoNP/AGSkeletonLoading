@@ -5,10 +5,11 @@ import android.graphics.Path
 import android.graphics.RectF
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.core.graphics.toRect
+import androidx.core.view.children
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("unused")
 open class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(viewGroup) {
@@ -21,14 +22,24 @@ open class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer
             it.key.visibility = View.INVISIBLE
         }
 
+        (viewGroup as? ListView)?.isEnabled = false
+        (viewGroup as? RecyclerView)?.suppressLayout(true)
         super.startLoading()
     }
 
     override fun stopLoading() {
-        super.stopLoading()
         visibilityViewsMap.forEach {
             it.key.visibility = it.value
             (it.key as? ISkeletonDrawer)?.stopLoading()
+        }
+
+        super.stopLoading()
+        (viewGroup as? AbsListView)?.apply {
+            invalidateViews()
+            isEnabled = true
+        }
+        (viewGroup as? RecyclerView)?.apply {
+            suppressLayout(false)
         }
     }
 

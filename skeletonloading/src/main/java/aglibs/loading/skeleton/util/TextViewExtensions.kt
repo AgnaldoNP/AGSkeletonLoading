@@ -1,6 +1,8 @@
 package aglibs.loading.skeleton.util
 
+import android.graphics.Path
 import android.graphics.Rect
+import android.graphics.RectF
 import android.text.Layout
 import android.view.View
 import android.widget.TextView
@@ -23,11 +25,7 @@ fun TextView.getAllLineBounds(
         }
     } else {
         allLineBounds.add(
-            getSkeletonLineBounds(
-                this, 0,
-                splitSkeletonTextByLines,
-                clipToText
-            )
+            Rect(0, 0, this.width, this.height)
         )
     }
     return allLineBounds

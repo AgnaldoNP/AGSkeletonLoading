@@ -115,22 +115,155 @@ The Properties bellow has effect for all skeleton views loading
  - **splitSkeletonTextByLines**
    - If the layout or some inner layout is an EditText, it defines if the skeleton considers each line to be drawn or if its drawn as only one rectangle.
    > If true, lineSpacingExtra should be setted to separate the rectangles.
+
+   ```xml
+    <aglibs.loading.skeleton.view.SkeletonTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        app:splitSkeletonTextByLines="true" />
+
+    <aglibs.loading.skeleton.view.SkeletonTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        app:splitSkeletonTextByLines="false" />
+    ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample02.gif?raw=true)
+
  - **clipToText**
    - If the layout or some inner layout is an EditText, it defines if the skeleton should be drawn restricted to text and not to the entire layout
+   ```xml
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="20dp"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:clipToText="true" />
+
+
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:clipToText="false" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample03.gif?raw=true)
+
  - **skeletonColor**
    - The color used to draw the skeleton rectangles
+   ```xml
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="20dp"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:skeletonColor="#FF9696" />
+
+
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:skeletonColor="#96E7FF"/>
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample04.gif?raw=true)
+
  - **shimmerStrokeWidth**
    - Width of the shimmer effect. It works together with _shimmerBlurWidth_
- - **shimmerBlueWidth**
+   ```xml
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:shimmerStrokeWidth="100dp" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample05.gif?raw=true)
+
+ - **shimmerBlurWidth**
    - Width of the blur effect used as mask on _shimmerStrokeWidth_
+   ```xml
+    <aglibs.loading.skeleton.view.SkeletonTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="4dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        app:shimmerBlurWidth="10dp" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample06.gif?raw=true)
+
  - **shimmerLightenFactor**
    - Lighten factor applied on _skeletonColor_ to be used on shimmer effect, tipically it is from 0 to 1 depending on the _skeletonColor_
+   ```xml
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="20dp"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:shimmerLightenFactor="0.9"
+       app:skeletonColor="#F00" />
+
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:shimmerLightenFactor="0.2"
+       app:skeletonColor="#00F" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample07.gif?raw=true)
+
  - **skeletonCornerRadius**
    - Size of the skeleton rectangle corners radius
+   ```xml
+    <aglibs.loading.skeleton.view.SkeletonTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:lineSpacingExtra="4dp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        app:skeletonCornerRadius="0dp" />
+
+    <aglibs.loading.skeleton.view.SkeletonTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        app:splitSkeletonTextByLines="false"
+        app:skeletonCornerRadius="20dp" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample08.gif?raw=true)
+
  - **duration**
    - Time to shimmer effect be applied from the start of layout to end
  - **customDuration**
    - Customized _duration_
+   ```xml
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="20dp"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:duration="shortCycle" />
+
+   <aglibs.loading.skeleton.view.SkeletonTextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="20dp"
+       android:lineSpacingExtra="4dp"
+       android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+       app:customDuration="4000" />
+   ```
+   ![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample09.gif?raw=true)
 
 
 ### SkeletonListView and SkeletonRecyclerView
@@ -143,7 +276,7 @@ Once the layout is created need to reference it by adding *skeletonViewHolderIte
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingStart="2dp"
     android:paddingTop="10dp"
     android:paddingEnd="2dp"
@@ -192,6 +325,7 @@ Once the layout is created need to reference it by adding *skeletonViewHolderIte
     android:layout_height="match_parent"
     app:skeletonViewHolderItem="@layout/item_list"/>
 ```
+![GIF](https://github.com/AgnaldoNP/AGSkeletonLoading/blob/master/screenshots/sample10.gif?raw=true)
 
 #### SkeletonListView and SkeletonRecyclerView properties
  - **skeletonViewHolderItem**
@@ -199,7 +333,7 @@ Once the layout is created need to reference it by adding *skeletonViewHolderIte
  - **skeletonViewHolderAmount**
    - If setted, is the number of skeletons to be drawn, otherwise it will be calculated at runtime
  - **skeletonViewHolderTruncate**
-   - If true and _skeletonViewHolderAmount_ is not setted this property defines if the last item can be incompleted drawn
+   - If true and _skeletonViewHolderAmount_ is not setted this property defines if the last item can be incomplete drawn
 
 
 ## Contributions and Support
