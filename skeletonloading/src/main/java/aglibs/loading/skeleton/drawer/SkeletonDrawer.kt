@@ -95,7 +95,7 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
 
             animationDuration = Duration.get(
                 typedArray.getInteger(
-                    R.styleable.SkeletonView_duration,
+                    R.styleable.SkeletonView_skeletonAnimationDuration,
                     Duration.MEDIUM.ordinal
                 )
             ).millis()

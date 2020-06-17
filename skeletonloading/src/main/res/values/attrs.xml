@@ -16,7 +16,7 @@
         <attr name="skeletonViewHolderTruncate" format="boolean" />
 
         <attr name="customDuration" format="integer" />
-        <attr name="duration" format="enum">
+        <attr name="skeletonAnimationDuration" format="enum">
             <enum name="shortCycle" value="0" />
             <enum name="mediumCycle" value="1" />
             <enum name="longCycle" value="2" />

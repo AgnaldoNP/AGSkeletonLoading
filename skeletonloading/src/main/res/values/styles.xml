@@ -2,7 +2,7 @@
 
     <style name="DefaultSkeletonView">
         <item name="autoStart">true</item>
-        <item name="duration">mediumCycle</item>
+        <item name="skeletonAnimationDuration">mediumCycle</item>
         <item name="customDuration">-1</item>
         <item name="enableDevelopPreview">true</item>
         <item name="skeletonColor">@color/defaultSkeletonColor</item>
