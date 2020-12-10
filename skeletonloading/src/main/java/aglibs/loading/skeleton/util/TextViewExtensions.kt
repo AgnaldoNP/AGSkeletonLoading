@@ -1,8 +1,6 @@
 package aglibs.loading.skeleton.util
 
-import android.graphics.Path
 import android.graphics.Rect
-import android.graphics.RectF
 import android.text.Layout
 import android.view.View
 import android.widget.TextView

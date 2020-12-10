@@ -31,12 +31,16 @@ class SkeletonRecyclerView @JvmOverloads constructor(
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {
-        skeletonDrawer.startLoading()
+        post {
+            skeletonDrawer.startLoading()
+        }
     }
 
     override fun stopLoading() {
-        skeletonDrawer.stopLoading()
-        notifyVisibleItems()
+        post {
+            skeletonDrawer.stopLoading()
+            notifyVisibleItems()
+        }
     }
 
     private fun notifyVisibleItems() {

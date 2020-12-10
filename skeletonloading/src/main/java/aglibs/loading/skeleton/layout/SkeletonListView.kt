@@ -31,11 +31,15 @@ class SkeletonListView @JvmOverloads constructor(
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {
-        skeletonDrawer.startLoading()
+        post {
+            skeletonDrawer.startLoading()
+        }
     }
 
     override fun stopLoading() {
-        skeletonDrawer.stopLoading()
+        post {
+            skeletonDrawer.stopLoading()
+        }
     }
 
     override fun onDraw(canvas: Canvas?) {

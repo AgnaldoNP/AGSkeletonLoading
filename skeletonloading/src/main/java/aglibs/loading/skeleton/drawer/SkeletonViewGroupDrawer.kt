@@ -3,6 +3,7 @@ package aglibs.loading.skeleton.drawer
 import aglibs.loading.skeleton.util.getAllLineBounds
 import android.graphics.Path
 import android.graphics.RectF
+import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -15,31 +16,39 @@ import androidx.recyclerview.widget.RecyclerView
 open class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(viewGroup) {
 
     protected val visibilityViewsMap = hashMapOf<View, Int>()
+    private val handler = Handler()
 
     override fun startLoading() {
-        getAllVisibilityNonViewGroupViews(viewGroup, visibilityViewsMap)
-        visibilityViewsMap.forEach {
-            it.key.visibility = View.INVISIBLE
-        }
+        handler.removeCallbacksAndMessages(null)
+        handler.post {
+            visibilityViewsMap.clear()
+            getAllVisibilityNonViewGroupViews(viewGroup, visibilityViewsMap)
+            visibilityViewsMap.forEach {
+                it.key.visibility = View.INVISIBLE
+            }
 
-        (viewGroup as? ListView)?.isEnabled = false
-        (viewGroup as? RecyclerView)?.suppressLayout(true)
-        super.startLoading()
+            (viewGroup as? ListView)?.isEnabled = false
+            (viewGroup as? RecyclerView)?.suppressLayout(true)
+            super.startLoading()
+        }
     }
 
     override fun stopLoading() {
-        visibilityViewsMap.forEach {
-            it.key.visibility = it.value
-            (it.key as? ISkeletonDrawer)?.stopLoading()
-        }
+        handler.removeCallbacksAndMessages(null)
+        handler.post {
+            visibilityViewsMap.forEach {
+                it.key.visibility = it.value
+                (it.key as? ISkeletonDrawer)?.stopLoading()
+            }
 
-        super.stopLoading()
-        (viewGroup as? AbsListView)?.apply {
-            invalidateViews()
-            isEnabled = true
-        }
-        (viewGroup as? RecyclerView)?.apply {
-            suppressLayout(false)
+            super.stopLoading()
+            (viewGroup as? AbsListView)?.apply {
+                invalidateViews()
+                isEnabled = true
+            }
+            (viewGroup as? RecyclerView)?.apply {
+                suppressLayout(false)
+            }
         }
     }
 
