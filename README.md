@@ -20,7 +20,7 @@ allprojects {
 **Step 2.** Add the dependency
 ```
 dependencies {
-  implementation 'com.github.AgnaldoNP:AGSkeletonLoading:1.0'
+  implementation 'com.github.AgnaldoNP:AGSkeletonLoading:1.2'
 }
 ```
 [![](https://jitpack.io/v/AgnaldoNP/AGSkeletonLoading.svg)](https://jitpack.io/#AgnaldoNP/AGSkeletonLoading)
