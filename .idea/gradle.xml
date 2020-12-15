@@ -9,9 +9,9 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/skeletonloading" />
+            <option value="/media/agnaldo/Developer/git/AGSkeletonLoading" />
+            <option value="/media/agnaldo/Developer/git/AGSkeletonLoading/app" />
+            <option value="/media/agnaldo/Developer/git/AGSkeletonLoading/skeletonloading" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
