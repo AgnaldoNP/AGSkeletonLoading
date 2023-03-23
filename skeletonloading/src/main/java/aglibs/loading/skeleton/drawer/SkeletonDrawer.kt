@@ -7,6 +7,7 @@ import android.graphics.*
 import android.graphics.Paint.ANTI_ALIAS_FLAG
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.graphics.withTranslation
 
 
 @Suppress("unused")
@@ -154,12 +155,6 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
             AnimationUtils.getValueAnimator(
                 updateListener = this
             )
-
-        view.post {
-            if (autoStart) {
-                startLoading()
-            }
-        }
     }
 
     protected open fun applyStyles() {
@@ -195,6 +190,14 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         }
     }
 
+    fun onLayoutChanged() {
+        if (isLoading() || autoStart) {
+            stopLoading()
+            autoStart = false
+            startLoading()
+        }
+    }
+
     override fun onAnimationUpdate(animator: ValueAnimator) {
         currentAnimationProgress = animator.animatedValue as Float
         createSkeletonEffect()
@@ -218,8 +221,8 @@ abstract class SkeletonDrawer(private val view: View) : ValueAnimator.AnimatorUp
         effectPath.lineTo(effectX, viewHeight.toFloat())
     }
 
-    fun draw(canvas: Canvas?): Boolean {
-        canvas?.let {
+    fun draw(canvas: Canvas): Boolean {
+        canvas.withTranslation(view.paddingLeft.toFloat(), view.paddingTop.toFloat()) {
             if (!view.isInEditMode) {
                 if (isLoading()) {
                     canvas.drawPath(skeletonPath, skeletonPaint)

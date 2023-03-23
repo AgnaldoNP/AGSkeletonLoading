@@ -1,68 +1,42 @@
 package aglibs.loading.skeleton.drawer
 
 import android.content.Context.LAYOUT_INFLATER_SERVICE
-import android.content.Context.WINDOW_SERVICE
 import android.graphics.Path
-import android.graphics.PixelFormat
 import android.graphics.Rect
 import android.graphics.RectF
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.MeasureSpec
+import android.view.View.MeasureSpec.makeMeasureSpec
 import android.view.ViewGroup
-import android.view.WindowManager
 import kotlin.math.ceil
 import kotlin.math.truncate
 
 class SkeletonListViewDrawer(private val viewGroup: View) : SkeletonViewGroupDrawer(viewGroup) {
 
-    internal var viewHolderHeight = 0
-    private val windowManager: WindowManager = viewGroup.context
-        .getSystemService(WINDOW_SERVICE) as WindowManager
+    private var viewHolderHeight = 0
 
     override fun startLoading() {
         val parent = viewGroup.parent
-        if (skeletonViewHolderItem != -1 && parent is ViewGroup && skeletonRects.isEmpty()) {
-            val params = WindowManager.LayoutParams(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT,
-                WindowManager.LayoutParams.TYPE_APPLICATION_ATTACHED_DIALOG,
-                WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-                PixelFormat.TRANSLUCENT
-            )
-
+        if (skeletonViewHolderItem != -1 && parent is ViewGroup && skeletonRects.isEmpty()
+            && viewGroup.width > 0 && viewGroup.height > 0) {
             val layoutInflater = viewGroup.context
-                .getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater?
+                .getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-            viewGroup.post {
-                layoutInflater?.inflate(skeletonViewHolderItem, null)?.also { view ->
-                    view.let {
-                        setVisibilityForChildViews(it, View.INVISIBLE)
-                        windowManager.addView(view, params)
+            val view = layoutInflater.inflate(skeletonViewHolderItem, null)!!
 
-                        it.post {
-                            visibilityViewsMap.clear()
-                            getAllVisibilityNonViewGroupViews(view, visibilityViewsMap)
-                            viewHolderHeight = view.height
-                            createSkeleton()
-                            setVisibilityForChildViews(it, View.GONE)
-                            windowManager.removeView(view)
-                        }
-                    }
-                }
-            }
+            view.measure(
+                makeMeasureSpec(viewGroup.width - viewGroup.paddingLeft - viewGroup.paddingRight, MeasureSpec.AT_MOST),
+                makeMeasureSpec(viewGroup.height - viewGroup.paddingTop - viewGroup.paddingBottom, MeasureSpec.AT_MOST),
+            )
+            view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+
+            visibilityViewsMap.clear()
+            getAllVisibilityNonViewGroupViews(view, visibilityViewsMap)
+            viewHolderHeight = view.height
+            createSkeleton()
         }
         super.startLoading()
-    }
-
-    private fun setVisibilityForChildViews(view: View, visibility: Int) {
-        (view as? ViewGroup)?.let {
-            val childCount = it.childCount
-            for (i in 0 until childCount) {
-                if (it.visibility != View.GONE) {
-                    it.getChildAt(i).visibility = visibility
-                }
-            }
-        } ?: run { view.visibility = visibility }
     }
 
     override fun createSkeleton() {

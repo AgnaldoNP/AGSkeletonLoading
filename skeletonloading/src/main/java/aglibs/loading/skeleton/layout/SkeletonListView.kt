@@ -2,13 +2,10 @@ package aglibs.loading.skeleton.layout
 
 import aglibs.loading.skeleton.drawer.ISkeletonDrawer
 import aglibs.loading.skeleton.drawer.SkeletonListViewDrawer
-import aglibs.loading.skeleton.drawer.SkeletonViewGroupDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.view.View
 import android.widget.ListView
-import androidx.constraintlayout.widget.ConstraintLayout
 
 class SkeletonListView @JvmOverloads constructor(
     context: Context,
@@ -31,18 +28,14 @@ class SkeletonListView @JvmOverloads constructor(
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {
-        post {
-            skeletonDrawer.startLoading()
-        }
+        skeletonDrawer.startLoading()
     }
 
     override fun stopLoading() {
-        post {
-            skeletonDrawer.stopLoading()
-        }
+        skeletonDrawer.stopLoading()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         if (!skeletonDrawer.draw(canvas)) {
             super.onDraw(canvas)
         }
@@ -51,6 +44,11 @@ class SkeletonListView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         stopLoading()
         super.onDetachedFromWindow()
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        super.onLayout(changed, l, t, r, b)
+        if (changed) skeletonDrawer.onLayoutChanged()
     }
 
 }
