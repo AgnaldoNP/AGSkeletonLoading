@@ -27,18 +27,14 @@ class SkeletonRelativeLayout @JvmOverloads constructor(
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {
-        post {
-            skeletonDrawer.startLoading()
-        }
+        skeletonDrawer.startLoading()
     }
 
     override fun stopLoading() {
-        post {
-            skeletonDrawer.stopLoading()
-        }
+        skeletonDrawer.stopLoading()
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         if (!skeletonDrawer.draw(canvas)) {
             super.onDraw(canvas)
         }
@@ -47,6 +43,11 @@ class SkeletonRelativeLayout @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         stopLoading()
         super.onDetachedFromWindow()
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        super.onLayout(changed, l, t, r, b)
+        if (changed) skeletonDrawer.onLayoutChanged()
     }
 
 }

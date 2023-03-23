@@ -1,55 +1,43 @@
 package aglibs.loading.skeleton.drawer
 
+import aglibs.loading.skeleton.layout.SkeletonRecyclerView
 import aglibs.loading.skeleton.util.getAllLineBounds
 import android.graphics.Path
 import android.graphics.RectF
-import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.graphics.toRect
-import androidx.core.view.children
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 @Suppress("unused")
 open class SkeletonViewGroupDrawer(private val viewGroup: View) : SkeletonDrawer(viewGroup) {
 
     protected val visibilityViewsMap = hashMapOf<View, Int>()
-    private val handler = Handler()
 
     override fun startLoading() {
-        handler.removeCallbacksAndMessages(null)
-        handler.post {
-            visibilityViewsMap.clear()
-            getAllVisibilityNonViewGroupViews(viewGroup, visibilityViewsMap)
-            visibilityViewsMap.forEach {
-                it.key.visibility = View.INVISIBLE
-            }
-
-            (viewGroup as? ListView)?.isEnabled = false
-            (viewGroup as? RecyclerView)?.suppressLayout(true)
-            super.startLoading()
+        visibilityViewsMap.clear()
+        getAllVisibilityNonViewGroupViews(viewGroup, visibilityViewsMap)
+        visibilityViewsMap.forEach {
+            it.key.visibility = View.INVISIBLE
         }
+
+        (viewGroup as? ListView)?.isEnabled = false
+        (viewGroup as? SkeletonRecyclerView)?.suppressAdapter()
+        super.startLoading()
     }
 
     override fun stopLoading() {
-        handler.removeCallbacksAndMessages(null)
-        handler.post {
-            visibilityViewsMap.forEach {
-                it.key.visibility = it.value
-                (it.key as? ISkeletonDrawer)?.stopLoading()
-            }
-
-            super.stopLoading()
-            (viewGroup as? AbsListView)?.apply {
-                invalidateViews()
-                isEnabled = true
-            }
-            (viewGroup as? RecyclerView)?.apply {
-                suppressLayout(false)
-            }
+        visibilityViewsMap.forEach {
+            it.key.visibility = it.value
+            (it.key as? ISkeletonDrawer)?.stopLoading()
         }
+
+        super.stopLoading()
+        (viewGroup as? AbsListView)?.apply {
+            invalidateViews()
+            isEnabled = true
+        }
+        (viewGroup as? SkeletonRecyclerView)?.unsuppressAdapter()
     }
 
     protected fun getAllVisibilityNonViewGroupViews(subview: View, viewsMap: HashMap<View, Int>) {

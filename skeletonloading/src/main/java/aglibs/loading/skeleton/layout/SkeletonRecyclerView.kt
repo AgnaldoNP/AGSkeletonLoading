@@ -5,10 +5,8 @@ import aglibs.loading.skeleton.drawer.SkeletonListViewDrawer
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import kotlin.math.ceil
 
 class SkeletonRecyclerView @JvmOverloads constructor(
     context: Context,
@@ -31,47 +29,14 @@ class SkeletonRecyclerView @JvmOverloads constructor(
     override fun isLoading() = skeletonDrawer.isLoading()
 
     override fun startLoading() {
-        post {
-            skeletonDrawer.startLoading()
-        }
+        skeletonDrawer.startLoading()
     }
 
     override fun stopLoading() {
-        post {
-            skeletonDrawer.stopLoading()
-            notifyVisibleItems()
-        }
+        skeletonDrawer.stopLoading()
     }
 
-    private fun notifyVisibleItems() {
-        adapter?.let {
-            var start = 0
-            var end = 0
-
-            layoutManager?.let { lm ->
-                when (lm) {
-                    is LinearLayoutManager -> {
-                        start = lm.findFirstVisibleItemPosition()
-                        end = lm.findLastVisibleItemPosition()
-                    }
-                    is GridLayoutManager -> {
-                        start = lm.findFirstVisibleItemPosition()
-                        end = lm.findLastVisibleItemPosition()
-                    }
-                    else -> {
-                        start = 0
-                        end = ceil((height / skeletonDrawer.viewHolderHeight.toFloat())).toInt()
-                    }
-                }
-            }
-
-            for (i in start..end) {
-                it.notifyItemChanged(i)
-            }
-        }
-    }
-
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         if (!skeletonDrawer.draw(canvas)) {
             super.onDraw(canvas)
         }
@@ -82,4 +47,57 @@ class SkeletonRecyclerView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        super.onLayout(changed, l, t, r, b)
+        if (changed) skeletonDrawer.onLayoutChanged()
+    }
+
+    // adapter magic
+
+    private var actualAdapter: Adapter<*>? = null
+    override fun setAdapter(adapter: Adapter<*>?) {
+        if (isLayoutSuppressed) {
+            actualAdapter = adapter
+        } else {
+            super.setAdapter(adapter)
+        }
+    }
+
+    override fun swapAdapter(adapter: Adapter<*>?, removeAndRecycleExistingViews: Boolean) {
+        if (isLayoutSuppressed) {
+            actualAdapter = adapter
+        } else {
+            super.swapAdapter(adapter, removeAndRecycleExistingViews)
+        }
+    }
+
+    override fun getAdapter(): Adapter<*>? {
+        return if (isLayoutSuppressed) actualAdapter else super.getAdapter()
+    }
+
+    internal fun suppressAdapter() {
+        if (!isLayoutSuppressed) {
+            actualAdapter = super.getAdapter()
+            super.setAdapter(EmptyAdapter)
+            suppressLayout(true) // important to be *after* setAdapter() which unsuppresses layout
+        }
+    }
+    internal fun unsuppressAdapter() {
+        if (isLayoutSuppressed) {
+            super.setAdapter(actualAdapter)
+            actualAdapter = null
+            suppressLayout(false)
+        }
+    }
+
+}
+
+private object EmptyAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    override fun getItemCount(): Int = 0
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
+        throw UnsupportedOperationException()
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
+        throw UnsupportedOperationException()
 }
